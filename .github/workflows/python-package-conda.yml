@@ -153,7 +153,8 @@ jobs:
 
       - name: Build documentation
         run: |
-          pip install sphinx sphinx-book-theme docutils==0.16 sphinx-click myst-parser
+          pip install sphinx==4 sphinx-book-theme docutils==0.16 sphinx-click myst-parser 
+          pip install wheel setuptools ase numpy scipy click matplotlib pandas pyyaml spglib phonopy phono3py rdkit-pypi flake8 pytest pytest-cov
           pip install --upgrade jinja2
           cd docs
           make html
