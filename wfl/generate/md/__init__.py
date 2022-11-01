@@ -1,4 +1,5 @@
 import os
+import time
 import sys
 
 import numpy as np
@@ -212,7 +213,9 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
                 first_step_of_later_stage = True
 
             try:
+                start = time.time()
                 md.run(**run_kwargs)
+                time_per_step = (time.time() - start) / steps
             except Exception as exc:
                 if skip_failures:
                     sys.stderr.write(f'MD failed with exception \'{exc}\'\n')
@@ -228,6 +231,9 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
 
         if traj_select_after_func is not None:
             traj = traj_select_after_func(traj)
+
+        for at in traj:
+            at.info["time_per_step"] = time_per_step
 
         if update_config_type:
             # save config_type
