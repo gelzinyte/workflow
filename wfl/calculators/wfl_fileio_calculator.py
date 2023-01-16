@@ -5,6 +5,8 @@ import warnings
 
 from .utils import clean_rundir as utils_clean_rundir
 
+from ase.calculators.castep import Castep as ASE_Castep
+
 class WFLFileIOCalculator():
     """Mixin class implementing some methods that should be available to every
     WFL calculator that does I/O via files, i.e. DFT calculators
@@ -49,7 +51,7 @@ class WFLFileIOCalculator():
 
         self._wfl_rundir_prefix = Path(rundir_prefix)
         if self._wfl_rundir_prefix.is_absolute():
-            if self._wfl_workdir is not None:
+            if workdir is not None:
                 raise ValueError(f"Can not specify workdir {workdir} if rundir_prefix {rundir_prefix} is an absolute path")
         self._wfl_workdir = Path(workdir) if workdir is not None else Path(".")
         self._wfl_scratchdir = Path(scratchdir) if scratchdir is not None else None
@@ -66,18 +68,48 @@ class WFLFileIOCalculator():
             dir_name = str(self._cur_rundir.resolve()).replace("/", "", 1).replace("/", "_")
             directory = self._wfl_scratchdir / dir_name
             directory.mkdir(parents=True, exist_ok=True)
-            self.directory = directory
         else:
-            self.directory = self._cur_rundir
+            directory = self._cur_rundir
 
+        # ASE's Castep unconventionally uses `_directory` and has its own setter  
+        # and getter functions that only allows setting non-preditermined attributes
+        # if they start with an underscore.  
+        if isinstance(self, ASE_Castep):
+            self._directory = directory
+        else:
+            self.directory = directory
 
     def clean_rundir(self, _default_keep_files, calculation_succeeded):
-        utils_clean_rundir(self.directory, self._wfl_keep_files, _default_keep_files, calculation_succeeded)
+
+        # ASE's Castep unconventionally uses `_directory` and has its own setter  
+        # and getter functions that only allows setting non-preditermined attributes
+        # if they start with an underscore.
+        if isinstance(self, ASE_Castep):
+            directory = self._directory 
+        else:
+            directory = self.directory 
+
+        utils_clean_rundir(directory, self._wfl_keep_files, _default_keep_files, calculation_succeeded)
         if self._wfl_scratchdir is not None:
-            for f in Path(self.directory).glob("*"):
+            for f in Path(directory).glob("*"):
                 shutil.move(f, self._cur_rundir)
-            if list(Path(self.directory).iterdir()) == []:
-                warnings.warn(f"scratchdir {self.directory} is not empty, not deleting.")
-            else:
-                Path(self.directory).rmdir()
-                self.directory = '.' 
+            if Path(directory).exists():
+                if list(Path(directory).iterdir()) != []:
+                    warnings.warn(f"scratchdir {directory} is not empty, not deleting.")
+                else:
+                    Path(directory).rmdir()
+            # remove self._cur_rundir if nothing was moved from scratchdir
+            if list(self._cur_rundir.iterdir()) == []:
+                self._cur_rundir.rmdir()
+
+
+    def cleanup(self):
+        """Clean all (empty) directories that could not have been removed
+        immediately after the calculation, for example, because other parallel
+        process might be using them.
+        Done because `self.workdir_root` gets created upon initialisation, but we
+        can't ever be sure it's not needed anymore, so let's not do it automatically."""
+        if any(self.workdir_root.iterdir()):
+            print(f'{self.workdir_root.name} is not empty, not removing')
+        else:
+            self.workdir_root.rmdir()

@@ -28,9 +28,11 @@ author = 'N. Bernstein, T. K. Stenczel, E. Gelzinyte'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
-			  'sphinx.ext.napoleon', 
+			  'sphinx.ext.napoleon',
 			  'sphinx_click.ext',
-			  'myst_parser'
+                          'nbsphinx',
+			  'myst_parser',
+                          'IPython.sphinxext.ipython_console_highlighting'
 				]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -43,7 +45,7 @@ exclude_patterns = []
 
 # which files done in which language
 source_suffix = {
-	'.rst': 'restructuredtext', 
+	'.rst': 'restructuredtext',
 	'.md': 'markdown'
 }
 
@@ -60,3 +62,8 @@ html_theme = "sphinx_book_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []
+
+# Set nbsphinx Configuration Values
+nbsphinx_execute = 'never'
+nbsphinx_input_prompt = '%s'
+nbsphinx_prompt_width = '0'
