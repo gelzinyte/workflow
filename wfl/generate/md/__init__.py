@@ -8,6 +8,7 @@ from ase.md.nvtberendsen import NVTBerendsen
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution, Stationary
 from ase.md.verlet import VelocityVerlet
 from ase.units import GPa, fs
+from ase.io import write
 
 from wfl.autoparallelize import autoparallelize, autoparallelize_docstring
 from wfl.utils.at_copy_save_results import at_copy_save_results
@@ -22,7 +23,7 @@ bar = 1.0e-4 * GPa
 def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, temperature_tau=None,
               pressure=None, pressure_tau=None, compressibility_fd_displ=0.01,
               traj_step_interval=1, skip_failures=True, results_prefix='md_', verbose=False, update_config_type=True,
-              traj_select_during_func=lambda at: True, traj_select_after_func=None, abort_check=None):
+              traj_select_during_func=lambda at: True, traj_select_after_func=None, abort_check=None, traj_fname=None):
     """runs an MD trajectory with aggresive, not necessarily physical, integrators for
     sampling configs
 
@@ -186,6 +187,9 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
                 at.info['MD_step'] = cur_step
                 at_save = at_copy_save_results(at, results_prefix=results_prefix)
 
+                if traj_fname is not None:
+                    write(traj_fname, at, append=True)
+
                 if traj_select_during_func(at):
                     traj.append(at_save)
 
@@ -217,6 +221,7 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
                 md.run(**run_kwargs)
                 time_per_step = (time.time() - start) / steps
             except Exception as exc:
+                time_per_step='failure'
                 if skip_failures:
                     sys.stderr.write(f'MD failed with exception \'{exc}\'\n')
                     sys.stderr.flush()
