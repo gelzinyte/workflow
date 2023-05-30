@@ -1,568 +1,429 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wfl.fit package &#8212; workflow  documentation</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
-    
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'wfl.fit';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="wfl.fit.gap package" href="wfl.fit.gap.html" />
     <link rel="prev" title="wfl.descriptors package" href="wfl.descriptors.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">workflow  documentation</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="first_example.html">
-   First example
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="overview.html">
-   Overview
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="overview.configset.html">
-     Input and output of atomic structures
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="overview.parallelisation.html">
-     Automatic parallelization of tasks
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="operations.html">
-   Operations
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.calculators.html">
-     Calculators in workflow
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.generate.html">
-     Generating Configs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.select.html">
-     Selecting Configs
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.descriptors.html">
-     Descriptors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.gap_fitting.html">
-     Fitting GAP
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.multistage_gap_fitting.html">
-     Multistage GAP fitting
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.ace_fitting.html">
-     ACE fitting
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="operations.utils.html">
-     Utility functions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="workflows.html">
-   Workflows
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="workflows.rss.html">
-     How to do GAP-RSS
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="workflows.mlip_fitting.html">
-     Fitting a MLIP
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="examples.html">
-   Examples
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="examples.orca.html">
-     ORCA: all parallelisation options
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="examples.normal_modes.html">
-     Normal Modes (non-periodic)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="examples.smiles.html">
-     SMILES to .xyz
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="examples.autopara.html">
-     Customise Auto-parallelized Functions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="examples.md.html">
-     MD
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="modules.html">
-   Modules
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active has-children">
-    <a class="reference internal" href="wfl.html">
-     wfl package
-    </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-    <label for="toctree-checkbox-6">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul class="current">
-     <li class="toctree-l3">
-      <a class="reference internal" href="wfl.autoparallelize.html">
-       wfl.autoparallelize package
-      </a>
-     </li>
-     <li class="toctree-l3 has-children">
-      <a class="reference internal" href="wfl.calculators.html">
-       wfl.calculators package
-      </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
-      <label for="toctree-checkbox-7">
-       <i class="fas fa-chevron-down">
-       </i>
-      </label>
-      <ul>
-       <li class="toctree-l4">
-        <a class="reference internal" href="wfl.calculators.orca.html">
-         wfl.calculators.orca package
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="wfl.cli.html">
-       wfl.cli package
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="wfl.descriptors.html">
-       wfl.descriptors package
-      </a>
-     </li>
-     <li class="toctree-l3 current active has-children">
-      <a class="current reference internal" href="#">
-       wfl.fit package
-      </a>
-      <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
-      <label for="toctree-checkbox-8">
-       <i class="fas fa-chevron-down">
-       </i>
-      </label>
-      <ul>
-       <li class="toctree-l4">
-        <a class="reference internal" href="wfl.fit.gap.html">
-         wfl.fit.gap package
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="wfl.fit.modify_database.html">
-         wfl.fit.modify_database package
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="wfl.generate.html">
-       wfl.generate package
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="wfl.scripts.html">
-       wfl.scripts package
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="wfl.select.html">
-       wfl.select package
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="wfl.utils.html">
-       wfl.utils package
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">workflow  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="first_example.html">First Example</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="overview.html">Overview</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.overall_design.html">Overall design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.configset.html">Input and output of atomic structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.parallelisation.html">Automatic parallelization of tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.queued.html">Functions as independently queued jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="operations.html">Operations</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="operations.calculators.html">Calculators in Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.generate.html">Generating Atomic Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.descriptors.html">Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operations.select.html">Selecting Configs</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="operations.fitting.html">Fitting potentials</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="operations.gap_fitting.html">Fitting GAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operations.multistage_gap_fitting.html">Multistage GAP fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operations.ace_fitting.html">Fitting ACE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.index.html">Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.dimers.html">Generating Dimer Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.buildcell.html">Random Structures via buildcell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.orca_python.html">ORCA via Python script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.fhiaims_calculator.html">FHI-Aims Calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.mace.html">Parallelize MACE calculator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.mlip_fitting.html">Iterative GAP fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.daisy_chain_mlip_fitting.html">GAP fit workflow with many wfl use-case examples</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="examples.normal_modes.html">Normal Modes of molecules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.smiles.html">SMILES to <code class="docutils literal notranslate"><span class="pre">Atoms</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.md.html">Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.select_fps.html">Selection or Sampling of Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.contributions.html">Contributing Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="workflows.rss.html">GAP-RSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line.automatic_docs.html">Command line interface</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">Modules</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="wfl.html">wfl package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html">wfl.autoparallelize package</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="wfl.calculators.html">wfl.calculators package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="wfl.calculators.orca.html">wfl.calculators.orca package</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="wfl.cli.html">wfl.cli package</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="wfl.cli.commands.html">wfl.cli.commands package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.descriptors.html">wfl.descriptors package</a></li>
+<li class="toctree-l3 current active has-children"><a class="current reference internal" href="#">wfl.fit package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="wfl.fit.gap.html">wfl.fit.gap package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wfl.fit.modify_database.html">wfl.fit.modify_database package</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="wfl.generate.html">wfl.generate package</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="wfl.generate.md_PROTECT.html">wfl.generate.md package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.select.html">wfl.select package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.utils.html">wfl.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/wfl.fit.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/wfl.fit.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#subpackages">
-   Subpackages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit.ace">
-   wfl.fit.ace module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit.ref_error">
-   wfl.fit.ref_error module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit.utils">
-   wfl.fit.utils module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit">
-   Module contents
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>wfl.fit package</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#subpackages">
-   Subpackages
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit.ace">
-   wfl.fit.ace module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit.ref_error">
-   wfl.fit.ref_error module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit.utils">
-   wfl.fit.utils module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-wfl.fit">
-   Module contents
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>wfl.fit package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.ace">wfl.fit.ace module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.prepare_configs"><code class="docutils literal notranslate"><span class="pre">prepare_configs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.prepare_params"><code class="docutils literal notranslate"><span class="pre">prepare_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.run_ace_fit"><code class="docutils literal notranslate"><span class="pre">run_ace_fit()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.error">wfl.fit.error module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.calc"><code class="docutils literal notranslate"><span class="pre">calc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.errors_dumps"><code class="docutils literal notranslate"><span class="pre">errors_dumps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.errors_to_dataframe"><code class="docutils literal notranslate"><span class="pre">errors_to_dataframe()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.natural_sort"><code class="docutils literal notranslate"><span class="pre">natural_sort()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.select_units"><code class="docutils literal notranslate"><span class="pre">select_units()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.value_error_scatter"><code class="docutils literal notranslate"><span class="pre">value_error_scatter()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.utils">wfl.fit.utils module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.ace_fit_jl_path"><code class="docutils literal notranslate"><span class="pre">ace_fit_jl_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.copy_properties"><code class="docutils literal notranslate"><span class="pre">copy_properties()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.fix_stress_virial"><code class="docutils literal notranslate"><span class="pre">fix_stress_virial()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit">Module contents</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="section" id="wfl-fit-package">
-<h1>wfl.fit package<a class="headerlink" href="#wfl-fit-package" title="Permalink to this headline">#</a></h1>
+<h1>wfl.fit package<a class="headerlink" href="#wfl-fit-package" title="Permalink to this heading">#</a></h1>
 <div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">#</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="wfl.fit.gap.html">wfl.fit.gap package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.glue_2b">wfl.fit.gap.glue_2b module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.multistage">wfl.fit.gap.multistage module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.relocate">wfl.fit.gap.relocate module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.simple">wfl.fit.gap.simple module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.glue_2b">wfl.fit.gap.glue_2b module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.glue_2b.construct_glue_2b"><code class="docutils literal notranslate"><span class="pre">construct_glue_2b()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.multistage">wfl.fit.gap.multistage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.multistage.GAP_xml_modify_label"><code class="docutils literal notranslate"><span class="pre">GAP_xml_modify_label()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.multistage.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.multistage.max_cutoff"><code class="docutils literal notranslate"><span class="pre">max_cutoff()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.multistage.prep_params"><code class="docutils literal notranslate"><span class="pre">prep_params()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.relocate">wfl.fit.gap.relocate module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.relocate.gap_relocate"><code class="docutils literal notranslate"><span class="pre">gap_relocate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap.simple">wfl.fit.gap.simple module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.simple.dict_to_gap_fit_string"><code class="docutils literal notranslate"><span class="pre">dict_to_gap_fit_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.gap.html#wfl.fit.gap.simple.run_gap_fit"><code class="docutils literal notranslate"><span class="pre">run_gap_fit()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.fit.gap.html#module-wfl.fit.gap">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="wfl.fit.modify_database.html">wfl.fit.modify_database package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#module-wfl.fit.modify_database.gap_rss_set_config_sigmas_from_convex_hull">wfl.fit.modify_database.gap_rss_set_config_sigmas_from_convex_hull module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#module-wfl.fit.modify_database.scale_orig">wfl.fit.modify_database.scale_orig module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#module-wfl.fit.modify_database.simple_factor_nonperiodic">wfl.fit.modify_database.simple_factor_nonperiodic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#module-wfl.fit.modify_database.gap_rss_set_config_sigmas_from_convex_hull">wfl.fit.modify_database.gap_rss_set_config_sigmas_from_convex_hull module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.modify_database.html#wfl.fit.modify_database.gap_rss_set_config_sigmas_from_convex_hull.modify"><code class="docutils literal notranslate"><span class="pre">modify()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.modify_database.html#wfl.fit.modify_database.gap_rss_set_config_sigmas_from_convex_hull.piecewise_linear"><code class="docutils literal notranslate"><span class="pre">piecewise_linear()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#module-wfl.fit.modify_database.scale_orig">wfl.fit.modify_database.scale_orig module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.modify_database.html#wfl.fit.modify_database.scale_orig.modify"><code class="docutils literal notranslate"><span class="pre">modify()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#module-wfl.fit.modify_database.simple_factor_nonperiodic">wfl.fit.modify_database.simple_factor_nonperiodic module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.modify_database.html#wfl.fit.modify_database.simple_factor_nonperiodic.list_to_sigma_dict"><code class="docutils literal notranslate"><span class="pre">list_to_sigma_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.modify_database.html#wfl.fit.modify_database.simple_factor_nonperiodic.modify"><code class="docutils literal notranslate"><span class="pre">modify()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.modify_database.html#wfl.fit.modify_database.simple_factor_nonperiodic.modify_cell"><code class="docutils literal notranslate"><span class="pre">modify_cell()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.modify_database.html#wfl.fit.modify_database.simple_factor_nonperiodic.modify_with_factor"><code class="docutils literal notranslate"><span class="pre">modify_with_factor()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.fit.modify_database.html#module-wfl.fit.modify_database">Module contents</a></li>
 </ul>
 </li>
@@ -570,35 +431,51 @@ title="Print to PDF"
 </div>
 </div>
 <div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </div>
 <div class="section" id="module-wfl.fit.ace">
-<span id="wfl-fit-ace-module"></span><h2>wfl.fit.ace module<a class="headerlink" href="#module-wfl.fit.ace" title="Permalink to this headline">#</a></h2>
+<span id="wfl-fit-ace-module"></span><h2>wfl.fit.ace module<a class="headerlink" href="#module-wfl.fit.ace" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.fit.ace.fit">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.ace.</span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fitting_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ACE_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'REF_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_if_present</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_exec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/workflow/workflow/wfl/scripts/ace_fit.jl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_for_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ace.fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.ace.</span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fitting_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ACE_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_command</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'REF_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_if_present</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_for_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isolated_atom_info_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config_type'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isolated_atom_info_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ace.fit" title="Permalink to this definition">#</a></dt>
 <dd><p>Runs ace_fit on a set of fitting configs</p>
+<p><strong>Environment Variables</strong></p>
+<ul class="simple">
+<li><p>WFL_EXPYRE_INFO: JSON dict or name of file containing JSON with kwargs for RemoteInfo
+contructor to be used to run fitting in separate queued job</p></li>
+<li><p>WFL_ACE_FIT_JULIA_THREADS: used to set JULIA_NUM_THREADS for ace_fit.jl, which will
+use julia multithreading (LSQ assembly)</p></li>
+<li><p>WFL_ACE_FIT_BLAS_THREADS: used by ace_fit.jl for number of threads to set for BLAS
+multithreading in ace_fit</p></li>
+<li><p>WFL_ACE_FIT_COMMAND: command to execute ace_fit.jl, e.g.
+<code class="docutils literal notranslate"><span class="pre">julia</span> <span class="pre">$HOME/.julia/packages/ACE1pack/ChRvA/scripts/ace_fit.jl</span></code></p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fitting_configs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.ConfigSet" title="wfl.configset.ConfigSet"><em>ConfigSet</em></a>) – set of configurations to fit</p></li>
-<li><p><strong>ACE_name</strong> (<em>str</em>) – name of ACE potential (i.e. stem for resulting .json file). Overwrites any filename given in <cite>ace_fit_params</cite>.</p></li>
+<li><p><strong>ACE_name</strong> (<em>str</em>) – name of ACE potential (i.e. stem for resulting .json file). Overwrites any filename given in <code class="docutils literal notranslate"><span class="pre">ace_fit_params</span></code>.</p></li>
 <li><p><strong>ace_fit_params</strong> (<em>dict</em>) – parameters for ACE1pack.
-Any file names (ACE, fitting configs) already present will be updated,
-property keys to fit to will be prepended with <cite>ref_property_prefix</cite> and e0
-set up, if needed.</p></li>
+Any file names (ACE, fitting configs) already present will be updated.
+See <a class="reference internal" href="#wfl.fit.ace.prepare_params" title="wfl.fit.ace.prepare_params"><code class="xref py py-func docutils literal notranslate"><span class="pre">wfl.fit.ace.prepare_params()</span></code></a> for other parameters that will be set automatically.</p></li>
+<li><p><strong>ace_fit_command</strong> (<em>str</em><em>, </em><em>default None</em>) – executable for ace_fit.
+e.g. <code class="docutils literal notranslate"><span class="pre">julia</span> <span class="pre">$HOME/.julia/packages/ACE1pack/ChRvA/scripts/ace_fit.jl</span></code> or similar.
+Alternatively set by <cite>WFL_ACE_FIT_COMMAND</cite> env var.</p></li>
 <li><p><strong>ref_property_prefix</strong> (<em>str</em><em>, </em><em>default 'REF_'</em>) – string prefix added to atoms.info/arrays keys (energy, forces, virial, stress)</p></li>
 <li><p><strong>skip_if_present</strong> (<em>bool</em><em>, </em><em>default False</em>) – skip fitting if output is already present</p></li>
 <li><p><strong>run_dir</strong> (<em>str</em><em> or </em><em>Path</em><em>, </em><em>default '.'</em>) – directory to run in</p></li>
-<li><p><strong>ace_fit_exec</strong> (<em>str</em><em>, </em><em>default &quot;wfl/scripts/ace_fit.jl&quot;</em>) – executable for ace_fit</p></li>
 <li><p><strong>dry_run</strong> (<em>bool</em><em>, </em><em>default False</em>) – do a dry run, which returns the matrix size, rather than the potential name</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default True</em>) – print verbose output</p></li>
-<li><p><strong>remote_info</strong> (<em>dict</em><em> or </em><em>wfl.autoparallelize.utils.RemoteInfo</em><em>, or </em><em>'_IGNORE'</em><em> or </em><em>None</em>) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
+<li><p><strong>remote_info</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">wfl.autoparallelize.RemoteInfo</span></code>, or ‘_IGNORE’ or None) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
 constructor which triggers running job in separately queued job on remote machine.  If None,
-will try to use env var WFL_ACE_FIT_EXPYRE_INFO used (see below). ‘_IGNORE’ is for
+will try to use env var WFL_EXPYRE_INFO used (see above). ‘_IGNORE’ is for
 internal use, to ensure that remotely running job does not itself attempt to spawn another
 remotely running job.</p></li>
+<li><p><strong>remote_label</strong> (<em>str</em><em>, </em><em>default None</em>) – label to use to match in WFL_EXPYRE_INFO</p></li>
 <li><p><strong>wait_for_results</strong> (<em>bool</em><em>, </em><em>default True</em>) – wait for results of remotely executed job, otherwise return after starting job</p></li>
+<li><p><strong>isolated_atom_info_key</strong> (<em>str</em><em>, </em><em>default &quot;config_type&quot;</em>) – key for Atoms.info to select isolated atoms by, if not given in ace_fit_params.</p></li>
+<li><p><strong>isolated_atom_info_value</strong> (<em>str</em><em>, </em><em>default &quot;default&quot;</em>) – value of Atoms.info[isolated_atom_info_key] to match isolated atoms on
+“default” matches “isolated_atom” or “IsolatedAtom”.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -606,11 +483,6 @@ remotely running job.</p></li>
 <li><p><strong>ace_filename</strong> (<em>Path of saved ACE json file (if not dry_run)</em>)</p></li>
 <li><p><em>OR</em></p></li>
 <li><p><strong>size</strong> (<em>(int, int) size of least-squares matrix (if dry_run)</em>)</p></li>
-<li><p><em>Environment Variables</em></p></li>
-<li><p><em>———————</em></p></li>
-<li><p><strong>WFL_ACE_FIT_EXPYRE_INFO</strong> (<em>JSON dict or name of file containing JSON with kwargs for RemoteInfo</em>) – contructor to be used to run fitting in separate queued job</p></li>
-<li><p><strong>WFL_ACE_FIT_JULIA_THREADS</strong> (<em>used to set JULIA_NUM_THREADS for ace_fit.jl, which will use julia multithreading (LSQ assembly)</em>)</p></li>
-<li><p><strong>WFL_ACE_FIT_BLAS_THREADS</strong> (<em>used by ace_fit.jl for number of threads to set for BLAS multithreading in ace_fit</em>)</p></li>
 </ul>
 </p>
 </dd>
@@ -625,7 +497,7 @@ remotely running job.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.fit.ace.prepare_params">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.ace.</span></span><span class="sig-name descname"><span class="pre">prepare_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ACE_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitting_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'REF_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ace.prepare_params" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.ace.</span></span><span class="sig-name descname"><span class="pre">prepare_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ACE_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitting_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'REF_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isolated_atom_info_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config_type'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isolated_atom_info_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ace.prepare_params" title="Permalink to this definition">#</a></dt>
 <dd><p>Prepare ace_fit parameters so they are compatible with the rest of workflow.
 Runs ace_fit on a a set of fitting configs</p>
 <dl class="field-list simple">
@@ -634,14 +506,27 @@ Runs ace_fit on a a set of fitting configs</p>
 <li><p><strong>ACE_name</strong> (<em>str</em>) – name of ACE model, used as initial part of final potential JSON file, as well as other scratch files.
 Overrides any previous ‘ACE_fname’ in ace_fit_params</p></li>
 <li><p><strong>fitting_configs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.ConfigSet" title="wfl.configset.ConfigSet"><em>ConfigSet</em></a>) – set of configurations to fit</p></li>
-<li><p><strong>ace_fit_params</strong> (<em>dict</em>) – dict with all fitting parameters for ACE1pack,
-to be updated with data keys (with ref_property_prefix), and e0 values</p></li>
+<li><p><strong>ace_fit_params</strong> (<em>dict</em>) – <p>dict with all fitting parameters for ACE1pack,
+to be updated with</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">(energy|force|virial)_key</span></code> (with ref_property_prefix)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ACE_fname</span></code></p></li>
+<li><p>e0 values</p></li>
+<li><p>per-config E/F/V weight if it contains <code class="docutils literal notranslate"><span class="pre">&quot;weights&quot;:</span> <span class="pre">{</span> <span class="pre">&quot;from_sigma&quot;:</span> <span class="pre">&lt;some_value&gt;</span> <span class="pre">}</span></code>
+* if <code class="docutils literal notranslate"><span class="pre">&lt;some_value&gt;</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, each property’s weight will come from that property’s</p>
+<blockquote>
+<div><p>sigma.  Otherwise, it is expected to be a string info dict key and all 3 weights will come
+from that info field value times the global E/F/V.</p>
+</div></blockquote>
+</li>
+</ul>
+</p></li>
 <li><p><strong>run_dir</strong> (<em>str</em><em> or </em><em>Path</em><em>, </em><em>default '.'</em>) – path of directory to run in</p></li>
 <li><p><strong>ref_property_prefix</strong> (<em>str</em><em>, </em><em>default 'REF_'</em>) – string prefix added to atoms.info/arrays keys (energy, forces, virial, stress)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>ace_fit_params</strong> – with updated energy/force/virial keys and e0 values.</p>
+<dd class="field-even"><p><strong>ace_fit_params</strong> – with updated energy/force/virial keys, e0 values, and optional config_type weights</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Dict</p>
@@ -651,7 +536,7 @@ to be updated with data keys (with ref_property_prefix), and e0 values</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.fit.ace.run_ace_fit">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.ace.</span></span><span class="sig-name descname"><span class="pre">run_ace_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fitting_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_if_present</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_exec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/workflow/workflow/wfl/scripts/ace_fit.jl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_for_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ace.run_ace_fit" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.ace.</span></span><span class="sig-name descname"><span class="pre">run_ace_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fitting_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_if_present</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ace_fit_command</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_for_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ace.run_ace_fit" title="Permalink to this definition">#</a></dt>
 <dd><p>Runs ace_fit on a a set of fitting configs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -661,14 +546,17 @@ to be updated with data keys (with ref_property_prefix), and e0 values</p></li>
 Any file names (ACE, fitting configs) already present will be updated.</p></li>
 <li><p><strong>skip_if_present</strong> (<em>bool</em><em>, </em><em>default False</em>) – skip fitting if output is already present</p></li>
 <li><p><strong>run_dir</strong> (<em>str</em><em> or </em><em>Path</em><em>, </em><em>default '.'</em>) – directory to run in</p></li>
-<li><p><strong>ace_fit_exec</strong> (<em>str</em><em>, </em><em>default &quot;wfl/scripts/ace_fit.jl&quot;</em>) – executable for ace_fit</p></li>
+<li><p><strong>ace_fit_command</strong> (<em>str</em><em>, </em><em>default None.</em>) – executable for ace_fit.
+e.g. <cite>julia $HOME/.julia/packages/ACE1pack/ChRvA/scripts/ace_fit.jl</cite> or similar.
+Alternatively set by WFL_ACE_FIT_COMMAND.</p></li>
 <li><p><strong>dry_run</strong> (<em>bool</em><em>, </em><em>default False</em>) – do a dry run, which returns the matrix size, rather than the potential file path</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default True</em>) – print verbose output</p></li>
-<li><p><strong>remote_info</strong> (<em>dict</em><em> or </em><em>wfl.autoparallelize.utils.RemoteInfo</em><em>, or </em><em>'_IGNORE'</em><em> or </em><em>None</em>) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
+<li><p><strong>remote_info</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">wfl.autoparallelize.RemoteInfo</span></code>, or ‘_IGNORE’ or None) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
 constructor which triggers running job in separately queued job on remote machine.  If None,
-will try to use env var WFL_ACE_FIT_EXPYRE_INFO used (see below). ‘_IGNORE’ is for
+will try to use env var WFL_EXPYRE_INFO used (see below). ‘_IGNORE’ is for
 internal use, to ensure that remotely running job does not itself attempt to spawn another
 remotely running job.</p></li>
+<li><p><strong>remote_label</strong> (<em>str</em><em>, </em><em>default None</em>) – label to use to match in WFL_EXPYRE_INFO</p></li>
 <li><p><strong>wait_for_results</strong> (<em>bool</em><em>, </em><em>default True</em>) – wait for results of remotely executed job, otherwise return after starting job</p></li>
 </ul>
 </dd>
@@ -679,9 +567,10 @@ remotely running job.</p></li>
 <li><p><strong>size</strong> (<em>(int, int) size of least-squares matrix (if dry_run)</em>)</p></li>
 <li><p><em>Environment Variables</em></p></li>
 <li><p><em>———————</em></p></li>
-<li><p><strong>WFL_ACE_FIT_EXPYRE_INFO</strong> (<em>JSON dict or name of file containing JSON with kwargs for RemoteInfo</em>) – contructor to be used to run fitting in separate queued job</p></li>
+<li><p><strong>WFL_EXPYRE_INFO</strong> (<em>JSON dict or name of file containing JSON with kwargs for RemoteInfo</em>) – contructor to be used to run fitting in separate queued job</p></li>
 <li><p><strong>WFL_ACE_FIT_JULIA_THREADS</strong> (<em>used to set JULIA_NUM_THREADS for ace_fit.jl, which will use julia multithreading (LSQ assembly)</em>)</p></li>
 <li><p><strong>WFL_ACE_FIT_BLAS_THREADS</strong> (<em>used by ace_fit.jl for number of threads to set for BLAS multithreading in ace_fit</em>)</p></li>
+<li><p><strong>WFL_ACE_FIT_COMMAND</strong> (<em>path to ace_fit.jl, e.g. “julia $HOME/.julia/packages/ACE1pack/ChRvA/scripts/ace_fit.jl”.</em>)</p></li>
 </ul>
 </p>
 </dd>
@@ -689,66 +578,139 @@ remotely running job.</p></li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-wfl.fit.ref_error">
-<span id="wfl-fit-ref-error-module"></span><h2>wfl.fit.ref_error module<a class="headerlink" href="#module-wfl.fit.ref_error" title="Permalink to this headline">#</a></h2>
+<div class="section" id="module-wfl.fit.error">
+<span id="wfl-fit-error-module"></span><h2>wfl.fit.error module<a class="headerlink" href="#module-wfl.fit.error" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="wfl.fit.ref_error.calc">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.ref_error.</span></span><span class="sig-name descname"><span class="pre">calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_keys</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ref_error.calc" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate errors for some potential relative to some reference data.
-NOTE: several optional args such as properties and forces_by_components are not yet available.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>input_configs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.ConfigSet" title="wfl.configset.ConfigSet"><em>ConfigSet</em></a>) – configs to check</p></li>
-<li><p><strong>output_configs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.OutputSpec" title="wfl.configset.OutputSpec"><em>OutputSpec</em></a>) – optional location for calculated configs (otherwise will be in memory, and lost when function returns)</p></li>
-<li><p><strong>calculator</strong> (<em>tuple</em><em>(</em><em>constructor</em><em>, </em><em>args</em><em>, </em><em>kwargs</em><em>)</em>) – contructor for calculator with any args or kwargs</p></li>
-<li><p><strong>ref_property_prefix</strong> (<em>str</em>) – prefix to property names for reference values</p></li>
-<li><p><strong>category_keys</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of info keys to use to create categories that configs are grouped into</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>error</strong> – error for each quantity by group</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="wfl.fit.ref_error.err_from_calculated_ats">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.ref_error.</span></span><span class="sig-name descname"><span class="pre">err_from_calculated_ats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calculated_ats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_property_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forces_by_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forces_by_element</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ref_error.err_from_calculated_ats" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="wfl.fit.error.calc">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">calc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_property_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config_type'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_property</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.calc" title="Permalink to this definition">#</a></dt>
 <dd><p>calculate error for calculation results relative to stored reference values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>calculated_ats</strong> (<em>iterable</em><em>(</em><em>Atoms</em><em>)</em>) – input configurations with reference values and calculated in info/arrays</p></li>
-<li><p><strong>ref_property_prefix</strong> (<em>str</em>) – prefix to info/array keys for reference properties</p></li>
+<li><p><strong>inputs</strong> (<em>iterable</em><em>(</em><em>Atoms</em><em>)</em>) – input configurations with reference and calculated values in Atoms.info/arrays</p></li>
 <li><p><strong>calc_property_prefix</strong> (<em>str</em>) – prefix to info/array keys for calculated properties</p></li>
-<li><p><strong>properties</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of ‘energy’, ‘energy_per_atom’, ‘forces’, ‘stress’, ‘virial’, ‘virial_per_atom’ to compute error for</p></li>
-<li><p><strong>category_keys</strong> (<em>str / list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>default None</em>) – results will be averaged by category, defined by a tuple containing the values of these
-keys in atoms.info, in addition to overall average _ALL_ category.</p></li>
-<li><p><strong>forces_by_component</strong> (<em>bool</em><em>, </em><em>default False</em>) – define force error as difference between each component, rather than norm of vector difference</p></li>
-<li><p><strong>forces_by_element</strong> (<em>bool</em><em>, </em><em>default False</em>) – calculate force error for each element separately</p></li>
+<li><p><strong>ref_property_prefix</strong> (<em>str</em>) – prefix to info/array keys for reference properties</p></li>
+<li><p><strong>config_properties</strong> (<em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>default</em><em> [</em><em>&quot;energy/atom&quot;</em><em>, </em><em>&quot;virial/atom/comp&quot;</em><em>]</em>) – list of <code class="docutils literal notranslate"><span class="pre">Atoms.info</span></code> calculated properties (to be prefixed by <code class="docutils literal notranslate"><span class="pre">ref_property_prefix</span></code>
+or <code class="docutils literal notranslate"><span class="pre">calc_property_prefix</span></code>) to compute error for.  <code class="docutils literal notranslate"><span class="pre">virial</span></code> will be reconstructed from <code class="docutils literal notranslate"><span class="pre">stress</span></code>.
+Properties can end with <code class="docutils literal notranslate"><span class="pre">/atom</span></code> or <code class="docutils literal notranslate"><span class="pre">/comp</span></code> for different components being counted separately.
+Default only used if neither <code class="docutils literal notranslate"><span class="pre">config_properties</span></code> nor <code class="docutils literal notranslate"><span class="pre">atom_properties</span></code> is present.</p></li>
+<li><p><strong>atom_properties</strong> (<em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>default</em><em> [</em><em>&quot;forces&quot;</em><em>]</em>) – list of <cite>Atoms.arrays</cite> calculated properties (to be prefixed by <code class="docutils literal notranslate"><span class="pre">ref_property_prefix</span></code>
+or <code class="docutils literal notranslate"><span class="pre">calc_property_prefix</span></code>) to compute error For.  Properties can end with <code class="docutils literal notranslate"><span class="pre">/comp</span></code>
+for different components being computed separately, and <code class="docutils literal notranslate"><span class="pre">/Z</span></code> for different atomic numbers
+to be assigned to different categories.  Default only used if neither <code class="docutils literal notranslate"><span class="pre">config_properties</span></code>
+nor <code class="docutils literal notranslate"><span class="pre">atom_properties</span></code> is present.</p></li>
+<li><p><strong>category_keys</strong> (<em>str / list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>default &quot;config_type&quot;</em>) – results will be averaged by category, defined by a string containing the values of these
+keys in Atoms.info, in addition to overall average _ALL_ category.</p></li>
+<li><p><strong>weight_property</strong> (<em>str</em><em>, </em><em>optional</em>) – if present, Atoms.info key for weights to apply to RMSE calculation</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>errors</strong></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict of energy per atom, force, virial per atom rms errors for each category</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>errors</strong> (<em>dict of RMSE and MAE for each category and property</em>)</p></li>
+<li><p><strong>diffs</strong> (<em>dict with list of differences for each category and property</em>)</p></li>
+<li><p><strong>parity</strong> (<em>dict with “ref” and “calc” keys, each containing list of property values for</em>) – each category and property, for parity plots</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="wfl.fit.ref_error.get_properties">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.ref_error.</span></span><span class="sig-name descname"><span class="pre">get_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.ref_error.get_properties" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="wfl.fit.error.errors_dumps">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">errors_dumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RMSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.errors_dumps" title="Permalink to this definition">#</a></dt>
+<dd><p>converts errors dictionary to dataframe and prints nicely.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>errors</strong> (<em>dict</em>) – Dictionary returned by wfl.fit.error.calculate()</p></li>
+<li><p><strong>error_type</strong> (<em>str in</em><em> [</em><em>&quot;RMSE</em><em>, </em><em>&quot;MAE&quot;</em><em>]</em><em>, </em><em>default &quot;RMSE&quot;</em>) – root-mean-square or maximum-absolute error</p></li>
+<li><p><strong>precision</strong> (<em>int</em><em>, </em><em>default 2</em>) – Float precision when printing</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.fit.error.errors_to_dataframe">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">errors_to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RMSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.errors_to_dataframe" title="Permalink to this definition">#</a></dt>
+<dd><p>converts errors dictionary to dataframe with properties as columns
+and categories as rows</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>errors</strong> (<em>dict</em>) – Dictionary returned by wfl.fit.error.calculate()</p></li>
+<li><p><strong>error_type</strong> (<em>str in</em><em> [</em><em>&quot;RMSE</em><em>, </em><em>&quot;MAE&quot;</em><em>]</em><em>, </em><em>default &quot;RMSE&quot;</em>) – root-mean-square or maximum-absolute error</p></li>
+<li><p><strong>units_dict</strong> (<em>dict</em><em>, </em><em>None</em>) – dictionary with units for non-default properties. Example:
+{“energy”: {“parity”: (“eV”, 1.0), “error”: (“meV”, 1.0e3)}},
+Where each tuple containes units lable and conversion factor from ASE-default units.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.fit.error.natural_sort">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">natural_sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.natural_sort" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.fit.error.select_units">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">select_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plt_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.select_units" title="Permalink to this definition">#</a></dt>
+<dd><p>select unit labels and conversion factors from ASE default for each property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prop</strong> (<em>str</em>) – name of property. By default upported “energy”, “atomization_energy”, “forces” and “virial”,
+in combination with “/atom”, “/comp”, “/Z” as appropriate.</p></li>
+<li><p><strong>plt_type</strong> (<em>str in</em><em> [</em><em>&quot;error&quot;</em><em>, </em><em>&quot;parity&quot;</em><em>]</em>) – type of plot</p></li>
+<li><p><strong>units_dict</strong> (<em>dict</em><em>, </em><em>default None</em>) – dictionary with units for non-default properties. Example:
+{“energy”: {“parity”: (“eV”, 1.0), “error”: (“meV”, 1.0e3)}},
+Where each tuple containes units lable and conversion factor from ASE-default units.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>property_label</strong> (<em>str</em>)</p></li>
+<li><p><strong>conversion_factor</strong> (<em>float to multiply raw quantity by</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.fit.error.value_error_scatter">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">value_error_scatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_diffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_parity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reference</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_property_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'calculated</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RMSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_parity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.value_error_scatter" title="Permalink to this definition">#</a></dt>
+<dd><p>generate parity plot (calculated values vs. reference values) and/or scatterplot of
+errors vs. values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all_errors</strong> (<em>dict</em>) – dict of errors returned by error.calc (first returned item)</p></li>
+<li><p><strong>all_diffs</strong> (<em>dict</em>) – dict of property differences returned by error.calc (second returned item)</p></li>
+<li><p><strong>all_parity</strong> (<em>dict</em>) – dict of property values for parity returned by error.calc (third returned item)</p></li>
+<li><p><strong>output</strong> (<em>str</em>) – output filename</p></li>
+<li><p><strong>properties</strong> (<em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>default None</em>) – properties to plot, if None plot all</p></li>
+<li><p><strong>ref_property_prefix</strong> (<em>str</em><em>, </em><em>default &quot;reference &quot;</em>) – prefix for reference property labels</p></li>
+<li><p><strong>calc_property_prefix</strong> (<em>str</em><em>, </em><em>default &quot;calculated &quot;</em>) – prefix for reference property labels</p></li>
+<li><p><strong>error_type</strong> (<em>str in</em><em> [</em><em>&quot;RMSE</em><em>, </em><em>&quot;MAE&quot;</em><em>]</em><em>, </em><em>default &quot;RMSE&quot;</em>) – root-mean-square or maximum-absolute error</p></li>
+<li><p><strong>cmap</strong> (<em>str</em><em>, </em><em>default None</em>) – colormap name to use. If None use default based on number of categories.</p></li>
+<li><p><strong>units_dict</strong> (<em>dict</em><em>, </em><em>default None</em>) – dictionary with units for non-default properties. Example:
+{“energy”: {“parity”: (“eV”, 1.0), “error”: (“meV”, 1.0e3)}},
+Where each tuple containes units lable and conversion factor from ASE-default units.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 <div class="section" id="module-wfl.fit.utils">
-<span id="wfl-fit-utils-module"></span><h2>wfl.fit.utils module<a class="headerlink" href="#module-wfl.fit.utils" title="Permalink to this headline">#</a></h2>
+<span id="wfl-fit-utils-module"></span><h2>wfl.fit.utils module<a class="headerlink" href="#module-wfl.fit.utils" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.fit.utils.ace_fit_jl_path">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.utils.</span></span><span class="sig-name descname"><span class="pre">ace_fit_jl_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.utils.ace_fit_jl_path" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.fit.utils.copy_properties">
 <span class="sig-prename descclassname"><span class="pre">wfl.fit.utils.</span></span><span class="sig-name descname"><span class="pre">copy_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_keys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stress_to_virial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.utils.copy_properties" title="Permalink to this definition">#</a></dt>
@@ -788,62 +750,129 @@ attached calculator (e.g. SinglePointCalculator)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="wfl.fit.utils.get_RemoteInfo">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.utils.</span></span><span class="sig-name descname"><span class="pre">get_RemoteInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remote_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.utils.get_RemoteInfo" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
 </div>
 <div class="section" id="module-wfl.fit">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wfl.fit" title="Permalink to this headline">#</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wfl.fit" title="Permalink to this heading">#</a></h2>
 </div>
 </div>
 
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="wfl.descriptors.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">wfl.descriptors package</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="wfl.descriptors.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">wfl.descriptors package</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="wfl.fit.gap.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="wfl.fit.gap.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">wfl.fit.gap package</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By N. Bernstein, T. K. Stenczel, E. Gelzinyte<br/>
-  
-      &copy; Copyright .<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.ace">wfl.fit.ace module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.prepare_configs"><code class="docutils literal notranslate"><span class="pre">prepare_configs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.prepare_params"><code class="docutils literal notranslate"><span class="pre">prepare_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.ace.run_ace_fit"><code class="docutils literal notranslate"><span class="pre">run_ace_fit()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.error">wfl.fit.error module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.calc"><code class="docutils literal notranslate"><span class="pre">calc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.errors_dumps"><code class="docutils literal notranslate"><span class="pre">errors_dumps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.errors_to_dataframe"><code class="docutils literal notranslate"><span class="pre">errors_to_dataframe()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.natural_sort"><code class="docutils literal notranslate"><span class="pre">natural_sort()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.select_units"><code class="docutils literal notranslate"><span class="pre">select_units()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.value_error_scatter"><code class="docutils literal notranslate"><span class="pre">value_error_scatter()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.utils">wfl.fit.utils module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.ace_fit_jl_path"><code class="docutils literal notranslate"><span class="pre">ace_fit_jl_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.copy_properties"><code class="docutils literal notranslate"><span class="pre">copy_properties()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.fix_stress_virial"><code class="docutils literal notranslate"><span class="pre">fix_stress_virial()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit">Module contents</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By N. Bernstein, T. K. Stenczel, E. Gelzinyte
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
