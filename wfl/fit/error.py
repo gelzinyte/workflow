@@ -429,7 +429,7 @@ def _annotate_error_plot(ax, property, ref_property_prefix, calc_property_prefix
     ax.set_yscale('log')
 
 
-def errors_dumps(errors, error_type="RMSE", precision=2):
+def errors_dumps(errors, error_type="RMSE", precision=2, units_dict=None):
     """converts errors dictionary to dataframe and prints nicely.
 
     Parameters
@@ -442,7 +442,7 @@ def errors_dumps(errors, error_type="RMSE", precision=2):
         Float precision when printing
     """
 
-    df = errors_to_dataframe(errors, error_type=error_type)
+    df = errors_to_dataframe(errors, error_type=error_type, units_dict=units_dict)
     df_str = df.to_string(
         max_rows = None,
         max_cols = None,
@@ -473,6 +473,7 @@ def errors_to_dataframe(errors, error_type="RMSE", units_dict=None):
     # store error_type value and counts in their own columns
     df_errors = {}
     for prop in errors:
+        # import pdb; pdb.set_trace()
         units_factor = select_units(prop, 'error', units_dict=units_dict)
 
         prop_header = re.sub(r'^energy\b', 'E', prop)

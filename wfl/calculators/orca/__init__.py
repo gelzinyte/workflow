@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import shutil
 import tempfile
 import warnings
@@ -110,12 +111,15 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
         self.setup_rundir()
 
         try:
+            start = time.time()
             self.write_input(self.atoms, properties, system_changes)
             self.execute()
             self.read_results()
             if self.post_process is not None:
                 self.post_process(self)
             calculation_succeeded=True
+            exec_time = time.time() - start
+            self.extra_results["config"]["execution_time"] = exec_time
         except Exception as e:
             calculation_succeeded=False
             raise e
