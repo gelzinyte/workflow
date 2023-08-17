@@ -1,6 +1,6 @@
 import click
 
-from quippy.potential import Potential
+#from quippy.potential import Potential
 
 from wfl.autoparallelize import AutoparaInfo
 from wfl.cli import cli_options as opt

@@ -99,6 +99,10 @@ def save_results(atoms, properties, results_prefix=None):
         config_results['dipole'] = atoms.get_dipole_moment()
     if 'magmom' in properties:
         config_results['magmom'] = atoms.get_magnetic_moment()
+    if "energies" in properties:
+        config_results["energies"] = atoms.calc.results["energies"]
+    if "energy_var" in properties:
+        config_results["energy_var"] = atoms.calc.results["energy_var"]
 
     # copy per-atom results
     atoms_results = {}
@@ -110,8 +114,18 @@ def save_results(atoms, properties, results_prefix=None):
         atoms_results['charges'] = atoms.get_charges()
     if 'magmoms' in properties:
         atoms_results['magmoms'] = atoms.get_magnetic_moments()
-    if 'energies' in properties:
-        atoms_results['energies'] = atoms.get_potential_energies()
+    # incompatible with MACE results
+    # if 'energies' in properties:
+        # atoms_results['energies'] = atoms.get_potential_energies()
+    if "node_energy" in properties:
+        atoms_results["node_energy"] = atoms.calc.results["node_energy"] 
+    
+    if "forces_comm" in properties:
+        for idx, forces_com in enumerate(atoms.calc.results["forces_comm"]):
+            atoms_results[f"forces_comm_{idx}"] = forces_com
+
+
+
 
     if "extra_results" in dir(atoms.calc):
         if results_prefix is None and (len(atoms.calc.extra_results.get("config", {})) > 0 or
