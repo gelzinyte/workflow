@@ -110,9 +110,12 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
         # from WFLFileIOCalculator
         self.setup_rundir()
 
+        # print(self.command)
+
         try:
             start = time.time()
             self.write_input(self.atoms, properties, system_changes)
+            # import pdb; pdb.set_trace()
             self.execute()
             self.read_results()
             if self.post_process is not None:

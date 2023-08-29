@@ -111,7 +111,7 @@ class BasinHoppingORCA(Calculator):
     orcablocks: str
         What you'd put in the "% ... end"-blocks.
 
-    orca_command: str
+    calculator_exec: str
         command of ORCA calculator as in path
 
     keep_files: bool
@@ -133,7 +133,7 @@ class BasinHoppingORCA(Calculator):
                  forces_tol=0.05, seed="orca", n_orb=10, max_angle=60.,
                  smearing=5000., maxiter=500, chained_hops=True,
                  orcasimpleinput='UHF PBE def2-SVP tightscf', orcablocks=None,
-                 orca_command='orca',
+                 calculator_exec='orca',
                  keep_files=False, uhf=True, **kwargs):
  
         super(BasinHoppingORCA, self).__init__(atoms=atoms, **kwargs)
@@ -144,7 +144,7 @@ class BasinHoppingORCA(Calculator):
         self.maxiter = maxiter
         self.orcasimpleinput = orcasimpleinput
         self.orcablocks = (orcablocks if orcablocks is not None else "")
-        self.orca_command = orca_command
+        self.calculator_exec = calculator_exec
 
         # basin hopping settings
         if n_hop < 1:
@@ -182,9 +182,7 @@ class BasinHoppingORCA(Calculator):
 
         # needed dry run of the ase calculator and check if calculation is
         # required
-        Calculator.calculate(self, atoms,
-                                                        properties,
-                                                        system_changes)
+        Calculator.calculate(self, atoms, properties,  system_changes)
         if not self.calculation_required(self.atoms, properties):
             return
 
@@ -224,7 +222,10 @@ class BasinHoppingORCA(Calculator):
         tmp = self._make_tempdir()
         os.chdir(tmp)
 
+        print(f'rundir: {tmp}')
+
         try:
+            # import pdb; pdb.set_trace()
             energy_array, forces_array = self._calc_one_run()
         except Exception as e:
             print(
@@ -321,6 +322,7 @@ class BasinHoppingORCA(Calculator):
         assert force_array.shape == (
             self.n_run, self.n_hop, len(self.atoms), 3)
 
+
         # decide if results are acceptable
         energy_min_per_run = np.min(energy_array, axis=1)
         non_inf = energy_min_per_run < np.inf
@@ -410,9 +412,13 @@ class BasinHoppingORCA(Calculator):
         else:
             rot_string = self._generate_perturbations()
 
+        # import pdb; pdb.set_trace()
+
+        
+
         calc = orca.ORCA(
             label=self.seed,
-            orca_command=self.orca_command,
+            calculator_exec=self.calculator_exec,
             charge=0, mult=self.get_multiplicity(),
             task='engrad',
             orcasimpleinput=self.orcasimpleinput,
