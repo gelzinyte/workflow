@@ -1,4 +1,5 @@
 import os
+import time
 import sys
 
 import numpy as np
@@ -78,8 +79,12 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
     -------
         list(Atoms) trajectories
     """
+    
+    print("pre calculator")
 
     calculator = construct_calculator_picklesafe(calculator)
+
+    print("post calculator")
 
     all_trajs = []
 
@@ -186,6 +191,7 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
 
         def process_step(interval):
             nonlocal cur_step, first_step_of_later_stage
+            print(f"step {cur_step}")
 
             if not first_step_of_later_stage and cur_step % interval == 0:
                 at.info['MD_time_fs'] = cur_step * dt
@@ -199,6 +205,10 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
                     if abort_check.stop(at):
                         raise RuntimeError(f"MD was stopped by the MD checker function {abort_check.__class__.__name__}")
 
+                if "mace" in results_prefix:
+                    mace_var = at_save.info[f"{results_prefix}energy_var"]
+                    if mace_var > 1e-3:
+                        raise RuntimeError("Too large of a variance, stopping optimisation")
             first_step_of_later_stage = False
             cur_step += 1
 
@@ -219,14 +229,25 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
                 first_step_of_later_stage = True
 
             try:
+                start = time.time()
                 md.run(**run_kwargs)
+                exec_time = time.time() - start
             except Exception as exc:
+                exec_time="failed"
                 if skip_failures:
                     sys.stderr.write(f'MD failed with exception \'{exc}\'\n')
                     sys.stderr.flush()
                     break
                 else:
                     raise
+        
+        # add time 
+        if exec_time!='failed':
+            time_per_step = exec_time / len(traj)
+        else:
+            time_per_step="failed"
+        for at0 in traj:
+            at0.info[f'{results_prefix}exec_time_per_step'] = time_per_step
 
         if len(traj) == 0 or traj[-1] != at:
             if traj_select_during_func(at):

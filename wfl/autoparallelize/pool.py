@@ -4,7 +4,10 @@ import warnings
 import inspect
 
 import functools
-from multiprocessing.pool import Pool
+#from multiprocessing.pool import Pool
+from torch.multiprocessing import Pool, set_start_method
+#set_start_method("spawn")
+
 
 from ase.atoms import Atoms
 

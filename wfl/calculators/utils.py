@@ -155,7 +155,10 @@ def save_results(atoms, properties, results_prefix=None):
         for p, v in config_results.items():
             atoms.info[results_prefix + p] = v
         for p, v in atoms_results.items():
-            atoms.new_array(results_prefix + p, v)
+            if results_prefix + p not in atoms.arrays:
+                atoms.new_array(results_prefix + p, v)
+            else:
+                atoms.arrays[results_prefix + p] = v
 
 
 def clean_rundir(rundir, keep_files, default_keep_files, calculation_succeeded):

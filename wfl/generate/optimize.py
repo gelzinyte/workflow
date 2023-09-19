@@ -1,4 +1,5 @@
 import os
+import time
 import sys
 
 import ase.units
@@ -13,6 +14,11 @@ from wfl.utils.misc import atoms_to_list
 from wfl.utils.parallel import construct_calculator_picklesafe
 from wfl.utils.pressure import sample_pressure
 from .utils import config_type_append
+from ase.optimize import FIRE, LBFGS
+from ase.utils.ff import Morse, Angle, Dihedral, VdW
+from ase.calculators.ff import ForceField
+from ase.optimize.precon import PreconLBFGS, Exp, FF
+from ase.optimize.precon.neighbors import get_neighbours
 
 orig_log = PreconLBFGS.log
 
@@ -29,13 +35,13 @@ def _new_log(self, forces=None):
         pass
 
 
-PreconLBFGS.log = _new_log
+# PreconLBFGS.log = _new_log
 
 
 def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=1000, pressure=None,
            keep_symmetry=True, traj_step_interval=1, traj_subselect=None, skip_failures=True,
-           results_prefix='optimize_', verbose=False, update_config_type=True,
-           autopara_rng_seed=None, autopara_per_item_info=None,
+           results_prefix='optimize_', optimiser="PreconLBFGS", verbose=False, update_config_type=True,
+           autopara_rng_seed=None, precon=None, autopara_per_item_info=None,
            **opt_kwargs):
     """runs a structure optimization 
 
@@ -83,7 +89,11 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
     if opt_kwargs_to_use.get('logfile') is None and verbose:
         opt_kwargs_to_use['logfile'] = '-'
 
+    print('pre calculator')
+
     calculator = construct_calculator_picklesafe(calculator)
+
+    print('post calculator')
 
     if smax is None:
         smax = fmax
@@ -100,6 +110,13 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
 
         # original constraints
         org_constraints = at.constraints
+
+        if precon == "FF":
+            precon = get_ff_precon(at)
+        elif precon == "Exp":
+            precon = Exp(A=3) 
+        elif precon==None:
+            pass
 
         if keep_symmetry:
             sym = FixSymmetry(at)
@@ -121,45 +138,76 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
         else:
             wrapped_at = at
 
-        opt = PreconLBFGS(wrapped_at, **opt_kwargs_to_use)
+        if optimiser=="PreconLBFGS":
+            opt = PreconLBFGS(wrapped_at, precon=precon, **opt_kwargs_to_use)
+        elif optimiser == "LBFGS":
+            opt = LBFGS(wrapped_at, **opt_kwargs_to_use)
+        elif optimiser=="FIRE":
+            opt = FIRE(wrapped_at, **opt_kwargs_to_use)
 
         # default status, will be overwritten for first and last configs in traj
         at.info['optimize_config_type'] = 'optimize_mid'
         traj = []
+        cur_step = 1
 
-        def process_step():
-            if 'RSS_min_vol_per_atom' in at.info and at.get_volume() / len(at) < at.info['RSS_min_vol_per_atom']:
-                raise RuntimeError('Got volume per atom {} under minimum {}'.format(at.get_volume() / len(at),
-                                                                                    at.info['RSS_min_vol_per_atom']))
+        def process_step(interval):
+            nonlocal cur_step
+            print(f"step {cur_step}")
+            if cur_step % interval == 0:
+                if 'RSS_min_vol_per_atom' in at.info and at.get_volume() / len(at) < at.info['RSS_min_vol_per_atom']:
+                    raise RuntimeError('Got volume per atom {} under minimum {}'.format(at.get_volume() / len(at),
+                                                                                        at.info['RSS_min_vol_per_atom']))
 
-            if len(traj) > 0 and traj[-1] == at:
-                # Some optimization algorithms sometimes seem to repeat, perhaps
-                # only in weird circumstances, e.g. bad gradients near breakdown.
-                # Do not store those duplicate configs.
-                return
+                if len(traj) > 0 and traj[-1] == at:
+                    # Some optimization algorithms sometimes seem to repeat, perhaps
+                    # only in weird circumstances, e.g. bad gradients near breakdown.
+                    # Do not store those duplicate configs.
+                    return
+                
+                if np.any(np.abs(at.get_forces()) > 100):
+                    raise RuntimeError(f"Got extra large forces, interupting")
 
-            new_config = at_copy_save_results(at, results_prefix=results_prefix)
-            new_config.set_constraint(org_constraints)
-            traj.append(new_config)
+                new_config = at_copy_save_results(at, results_prefix=results_prefix)
+                new_config.set_constraint(org_constraints)
+                new_config.info["opt_step"] = cur_step
+                traj.append(new_config)
 
-        opt.attach(process_step, interval=traj_step_interval)
+                if "mace" in results_prefix:
+                    mace_var = new_config.info[f"{results_prefix}energy_var"]
+                    if mace_var > 1e-3:
+                        raise RuntimeError("Too large of a variance, stopping optimisation")
+
+            cur_step += 1
+
+        opt.attach(process_step, 1, traj_step_interval)
 
         # preliminary value
         final_status = 'unconverged'
 
         try:
-            opt.run(fmax=fmax, smax=smax, steps=steps)
+            start = time.time()
+            opt.run(fmax=fmax, steps=steps)
+            exec_time = time.time() - start
         except Exception as exc:
             # label actual failed optimizations
             # when this happens, the atomic config somehow ends up with a 6-vector stress, which can't be
             # read by xyz reader.
             # that should probably never happen
             final_status = 'exception'
+            exec_time = "failed"
             if skip_failures:
                 sys.stderr.write(f'Structure optimization failed with exception \'{exc}\'\n')
                 sys.stderr.flush()
             else:
                 raise
+
+        # add time 
+        if exec_time!='failed':
+            time_per_step = exec_time / len(traj)
+        else:
+            time_per_step="failed"
+        for at0 in traj:
+            at0.info[f'{results_prefix}exec_time_per_step'] = time_per_step
 
         if len(traj) == 0 or traj[-1] != at:
             new_config = at_copy_save_results(at, results_prefix=results_prefix)
@@ -241,3 +289,32 @@ def subselect_from_traj(traj, subselect=None):
 
     raise RuntimeError(f'Subselecting confgs from trajectory with rule '
                        f'"subselect={subselect}" is not yet implemented')
+
+
+
+def get_ff_precon(at):
+
+
+    neighbor_list = [[] for _ in range(len(at))]
+    morses = []; angles = []; dihedrals = []; vdws = []
+
+    i_list, j_list, d_list, fixed_atoms = get_neighbours(atoms=at, r_cut=1.5)
+    for i, j in zip(i_list, j_list):
+        neighbor_list[i].append(j)
+    for i in range(len(neighbor_list)):
+        neighbor_list[i].sort()
+
+    for i in range(len(at)):
+        for jj in range(len(neighbor_list[i])):
+            j = neighbor_list[i][jj]
+            if j > i:
+                morses.append(Morse(atomi=i, atomj=j, D=6.1322, alpha=1.8502, r0=1.4322))
+            for kk in range(jj+1, len(neighbor_list[i])):
+                k = neighbor_list[i][kk]
+                angles.append(Angle(atomi=j, atomj=i, atomk=k, k=10.0, a0=np.deg2rad(120.0), cos=True))
+                for ll in range(kk+1, len(neighbor_list[i])):
+                    l = neighbor_list[i][ll]
+                    dihedrals.append(Dihedral(atomi=j, atomj=i, atomk=k, atoml=l, k=0.346))
+    return FF(morses=morses, angles=angles, dihedrals=dihedrals)
+
+
