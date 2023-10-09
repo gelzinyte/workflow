@@ -37,6 +37,11 @@ def _run_autopara_wrappable(atoms, calculator, properties=None, output_prefix='_
     if properties is None:
         # properties = ['energy', 'forces', 'stress']
         pass
+    
+    if isinstance(calculator, tuple) and calculator[0] == "MACE":
+        from mace.calculators.mace  import MACECalculator
+        calculator = (MACECalculator, calculator[1], calculator[2])
+
     calculator = construct_calculator_picklesafe(calculator)
 
     if output_prefix == '_auto_':
