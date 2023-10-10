@@ -124,8 +124,8 @@ def save_results(atoms, properties, results_prefix=None):
         for idx, forces_com in enumerate(atoms.calc.results["forces_comm"]):
             atoms_results[f"forces_comm_{idx}"] = forces_com
 
-
-
+    if 'converged' in properties and results_prefix != None:
+        config_results['converged'] = atoms.get_calculator().read_convergence()
 
     if "extra_results" in dir(atoms.calc):
         if results_prefix is None and (len(atoms.calc.extra_results.get("config", {})) > 0 or
