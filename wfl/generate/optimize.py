@@ -63,7 +63,7 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
         constrain symmetry to maintain initial
     traj_step_interval: int, default 1
         if present, interval between trajectory snapshots
-    traj_subselect: "last_converged", default None
+    traj_subselect: "last_converged", "last", "high_mace_var" default None
         rule for sub-selecting configs from the full trajectory.
         Currently implemented: "last_converged", which takes the last config, if converged.
     skip_failures: bool, default True
@@ -90,6 +90,9 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
         opt_kwargs_to_use['logfile'] = '-'
 
     print('pre calculator')
+    if isinstance(calculator, tuple) and calculator[0] == "MACE":
+        from mace.calculators.mace  import MACECalculator
+        calculator = (MACECalculator, calculator[1], calculator[2])
 
     calculator = construct_calculator_picklesafe(calculator)
 
@@ -105,6 +108,7 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
     all_trajs = []
 
     for at_i, at in enumerate(atoms_to_list(atoms)):
+        print("structre", at_i)
         if autopara_per_item_info is not None:
             np.random.seed(autopara_per_item_info[at_i]["rng_seed"])
 
@@ -152,7 +156,7 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
 
         def process_step(interval):
             nonlocal cur_step
-            print(f"step {cur_step}")
+            #print(f"step {cur_step}")
             if cur_step % interval == 0:
                 if 'RSS_min_vol_per_atom' in at.info and at.get_volume() / len(at) < at.info['RSS_min_vol_per_atom']:
                     raise RuntimeError('Got volume per atom {} under minimum {}'.format(at.get_volume() / len(at),
@@ -174,7 +178,7 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
 
                 if "mace" in results_prefix:
                     mace_var = new_config.info[f"{results_prefix}energy_var"]
-                    if mace_var > 1e-3:
+                    if mace_var > 1e-1:
                         raise RuntimeError("Too large of a variance, stopping optimisation")
 
             cur_step += 1
@@ -263,7 +267,7 @@ autoparallelize_docstring(optimize, _run_autopara_wrappable, "Atoms")
 #    equispaced in Cartesian path length
 #    equispaced in some other kind of distance (e.g. SOAP)
 # also, should it also have max distance instead of number of samples?
-def subselect_from_traj(traj, subselect=None):
+def subselect_from_traj(traj, subselect=None, results_prefix="mace_"):
     """Sub-selects configurations from trajectory.
 
     Parameters
@@ -279,6 +283,18 @@ def subselect_from_traj(traj, subselect=None):
     """
     if subselect is None:
         return traj
+    
+    elif subselect=="last":
+        return [traj[-1]]
+    
+    elif subselect=="high_mace_var":
+        last_mace_var = traj[-1].info[f"{results_prefix}energy_var"]
+        if last_mace_var < 1e-3:
+            return [traj[-1]]
+        else:
+            return [at for at in traj if at.info[f"{results_prefix}energy_var"] > 1e-3]
+        
+
 
     elif subselect == "last_converged":
         converged_configs = [at for at in traj if at.info["optimize_config_type"] == "optimize_last_converged"]
