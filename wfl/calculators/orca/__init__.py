@@ -98,11 +98,14 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
         self.extra_results["config"] = {}
 
         self.post_process = post_process
+        # import pdb; pdb.set_trace()
 
 
     def calculate(self, atoms=None, properties=["energy", "forces"], system_changes=all_changes):
         """Does the calculation. Handles the working directories in addition to regular
         ASE calculation operations (writing input, executing, reading_results) """
+
+        import pdb; pdb.set_trace()
 
         Calculator.calculate(self, atoms, properties, system_changes)
 
@@ -224,7 +227,7 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
             raise CalculationFailed("Wavefunction not fully converged")
 
         self.read_energy()
-        if "engrad" in self.parameters.task:
+        if "engrad" in self.parameters.task or "opt" in self.parameters.task:
             self.read_forces()
 
         self.read_dipole()
