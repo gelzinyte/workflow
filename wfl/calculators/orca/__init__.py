@@ -4,6 +4,7 @@ import shutil
 import tempfile
 import warnings
 from pathlib import Path 
+import time
 import subprocess
 
 import ase.io
@@ -110,12 +111,15 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
         self.setup_rundir()
 
         try:
+            start = time.time()
             self.write_input(self.atoms, properties, system_changes)
             self.execute()
             self.read_results()
             if self.post_process is not None:
                 self.post_process(self)
             calculation_succeeded=True
+            exec_time = time.time() - start
+            self.extra_results["config"]["execution_time"] = exec_time
         except Exception as e:
             calculation_succeeded=False
             raise e
@@ -159,7 +163,7 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
 
         with open(self.label + '.inp', 'w') as f:
 
-            f.write(f"! {self.pick_task()} {self.parameters['orcasimpleinput']} \n")
+            f.write(f"! {self.pick_task(atoms)} {self.parameters['orcasimpleinput']} \n")
             f.write(f"{orcablocks} \n")
 
             f.write('*xyz')
@@ -176,13 +180,19 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
                         str(atom.position[2]) + '\n')
             f.write('*\n')
     
-    def pick_task(self):
+    def pick_task(self, atoms):
         # energy and force calculation is enforced
         task = self.parameters["task"]
+
+        if len(atoms) == 1:
+            self.set(task = " ")
+            return " "
+
         if task is None:
             task = "engrad"
         elif "engrad" not in task and "opt" not in task and "copt" not in task:
             task += " engrad"
+        self.set(task=task) 
         return task
 
     def is_converged(self):
@@ -215,7 +225,8 @@ class ORCA(WFLFileIOCalculator, ASE_ORCA):
             raise CalculationFailed("Wavefunction not fully converged")
 
         self.read_energy()
-        self.read_forces()
+        if "engrad" in self.parameters.task:
+            self.read_forces()
 
         self.read_dipole()
 

@@ -20,10 +20,16 @@ from ..utils import config_type_append
 bar = 1.0e-4 * GPa
 
 
+
+def gc():
+    from julia import Main
+    Main.eval("GC.gc()")
+
 def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, temperature_tau=None,
               pressure=None, pressure_tau=None, compressibility_fd_displ=0.01,
               traj_step_interval=1, skip_failures=True, results_prefix='md_', verbose=False, update_config_type=True,
-              traj_select_during_func=lambda at: True, traj_select_after_func=None, abort_check=None, traj_fname=None):
+              traj_select_during_func=lambda at: True, traj_select_after_func=None, abort_check=None, traj_fname=None,
+              traj_fn_info_entry=None, wdir=None):
     """runs an MD trajectory with aggresive, not necessarily physical, integrators for
     sampling configs
 
@@ -111,6 +117,14 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
                     t_stage['n_stages'] = 10
 
     for at in atoms_to_list(atoms):
+
+        if traj_fn_info_entry is not None:
+            traj_fname = at.info[traj_fn_info_entry]
+            if ".xyz" not in traj_fname:
+                traj_fname += ".xyz"
+            if wdir is not None:
+                traj_fname = os.path.join(wdir, traj_fname)
+
         at.calc = calculator
         compressibility = None
         if pressure is not None:
@@ -190,6 +204,8 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
                 if traj_fname is not None:
                     write(traj_fname, at, append=True)
 
+                
+
                 if traj_select_during_func(at):
                     traj.append(at_save)
 
@@ -212,6 +228,7 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, temperature=None, t
 
             md = md_constructor(at, **stage_kwargs)
             md.attach(process_step, 1, traj_step_interval)
+            md.attach(gc, interval=1000)
 
             if stage_i > 0:
                 first_step_of_later_stage = True

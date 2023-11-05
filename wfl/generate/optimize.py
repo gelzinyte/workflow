@@ -2,6 +2,7 @@ import os
 import sys
 
 import ase.units
+from ase.io import write
 import numpy as np
 import spglib
 from ase.constraints import ExpCellFilter
@@ -34,7 +35,7 @@ PreconLBFGS.log = _new_log
 
 def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=1000, pressure=None,
            keep_symmetry=True, traj_step_interval=1, traj_subselect=None, skip_failures=True,
-           results_prefix='optimize_', verbose=False, update_config_type=True, **opt_kwargs):
+           results_prefix='optimize_', verbose=False, update_config_type=True, traj_info_field=None, **opt_kwargs):
     """runs a structure optimization 
 
     Parameters
@@ -90,6 +91,13 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
     all_trajs = []
 
     for at in atoms_to_list(atoms):
+
+        if traj_info_field is not None:
+            traj_fn = at.info[traj_info_field] + ".xyz"
+            print(f"traj info field: {traj_fn}")
+        else:
+            traj_fn = None
+
         # original constraints
         org_constraints = at.constraints
 
@@ -133,6 +141,9 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
             new_config = at_copy_save_results(at, results_prefix=results_prefix)
             new_config.set_constraint(org_constraints)
             traj.append(new_config)
+
+            if traj_fn is not None:
+                write(traj_fn, new_config, append=True)
 
         opt.attach(process_step, interval=traj_step_interval)
 
