@@ -70,7 +70,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
                 raise ValueError("Cannot specify both calculator_exec and command")
             if AimsProfile is None:
                 # older syntax
-                kwargs_command["command"] = f"{calculator_exec} > aims.out"
+                kwargs_command["aims_command"] = calculator_exec
             else:
                 argv = shlex.split(calculator_exec)
                 try:
@@ -113,7 +113,6 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
 
         # from WFLFileIOCalculator
         self.setup_rundir()
-
         try:
             super().calculate(atoms=atoms, properties=properties, system_changes=system_changes)
             calculation_succeeded = True
