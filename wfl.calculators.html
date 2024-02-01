@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -18,22 +18,23 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -41,7 +42,7 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'wfl.calculators';</script>
     <link rel="shortcut icon" href="_static/wf_logo_final.png"/>
@@ -58,7 +59,15 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -93,11 +102,14 @@
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -112,9 +124,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -124,12 +138,23 @@
       
     
     
-    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="workflow  documentation - Home"/>
+    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="workflow  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="first_example.html">First Example</a></li>
@@ -306,20 +331,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -385,6 +412,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.generic.calculate"><code class="docutils literal notranslate"><span class="pre">calculate()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.calculators.kpts">wfl.calculators.kpts module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.kpts.universal_kspacing_k_mesh"><code class="docutils literal notranslate"><span class="pre">universal_kspacing_k_mesh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.kpts.universal_kspacing_n_k"><code class="docutils literal notranslate"><span class="pre">universal_kspacing_n_k()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.calculators.mopac">wfl.calculators.mopac module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.mopac.MOPAC"><code class="docutils literal notranslate"><span class="pre">MOPAC</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.mopac.MOPAC.calculate"><code class="docutils literal notranslate"><span class="pre">MOPAC.calculate()</span></code></a></li>
@@ -395,7 +427,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.calculators.utils">wfl.calculators.utils module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.clean_rundir"><code class="docutils literal notranslate"><span class="pre">clean_rundir()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.handle_nonperiodic"><code class="docutils literal notranslate"><span class="pre">handle_nonperiodic()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.parse_genericfileio_profile_argv"><code class="docutils literal notranslate"><span class="pre">parse_genericfileio_profile_argv()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.save_results"><code class="docutils literal notranslate"><span class="pre">save_results()</span></code></a></li>
 </ul>
 </li>
@@ -403,6 +435,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp"><code class="docutils literal notranslate"><span class="pre">Vasp</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.calculate"><code class="docutils literal notranslate"><span class="pre">Vasp.calculate()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.default_parameters"><code class="docutils literal notranslate"><span class="pre">Vasp.default_parameters</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.param_dict_of_key"><code class="docutils literal notranslate"><span class="pre">Vasp.param_dict_of_key()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.per_config_restore"><code class="docutils literal notranslate"><span class="pre">Vasp.per_config_restore()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.per_config_setup"><code class="docutils literal notranslate"><span class="pre">Vasp.per_config_setup()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.wfl_generic_num_inputs_per_python_subprocess"><code class="docutils literal notranslate"><span class="pre">Vasp.wfl_generic_num_inputs_per_python_subprocess</span></code></a></li>
@@ -429,7 +462,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <div class="section" id="wfl-calculators-package">
 <h1>wfl.calculators package<a class="headerlink" href="#wfl-calculators-package" title="Permalink to this heading">#</a></h1>
@@ -697,7 +730,8 @@ or FileIOCalculator.calculate() for the v3.22.1</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="wfl.calculators.espresso.Espresso.setup_calc_params">
 <span class="sig-name descname"><span class="pre">setup_calc_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">properties</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.espresso.Espresso.setup_calc_params" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Setup calculator params based on atoms structure (pbc) and requested properties</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="wfl.calculators.espresso.Espresso.wfl_generic_default_autopara_info">
@@ -712,16 +746,24 @@ or FileIOCalculator.calculate() for the v3.22.1</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.calculators.generic.calculate">
 <span class="sig-prename descclassname"><span class="pre">wfl.calculators.generic.</span></span><span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.generic.calculate" title="Permalink to this definition">#</a></dt>
-<dd><p>evaluates configs using an arbitrary calculator and store results in SinglePointCalculator</p>
+<dd><p>evaluates configs using an arbitrary calculator and store results in info/arrays entries
+or <cite>SinglePointCalculator</cite>.</p>
 <p>Defaults to wfl_num_inputs_per_python_subprocess=10, to avoid recreating the calculator for
 each configuration, unless calculator class defines a wfl_generic_default_autopara_info
 attribute in which case that value is used for the default.</p>
+<p>If <cite>Atoms.info</cite> contains ‘WFL_CALCULATOR_INITIALIZER’, ‘WFL_CALCULATOR_ARGS’ or
+‘WFL_CALCULATOR_KWARGS’, an individual calculator will be created for that <cite>Atoms</cite> object.
+The <cite>initializer</cite> and <cite>*args</cite> will be _overridden_ by the corresponding <cite>Atoms.info</cite> entries, but
+the <cite>**kwargs</cite> will be _modified_ (<cite>dict.update</cite>) by the <cite>Atoms.info</cite> entry.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inputs</strong> (<em>iterable</em><em>(</em><em>Atoms</em><em>)</em>) – input quantities of type Atoms</p></li>
 <li><p><strong>outputs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.OutputSpec" title="wfl.configset.OutputSpec"><em>OutputSpec</em></a><em> or </em><em>None</em>) – where to write output atomic configs, or None for no output (i.e. only side-effects)</p></li>
-<li><p><strong>calculator</strong> (<em>Calculator /</em><em> (</em><em>initializer</em><em>, </em><em>args</em><em>, </em><em>kwargs</em><em>)</em>) – ASE calculator or routine to call to create calculator</p></li>
+<li><p><strong>calculator</strong> (<em>Calculator /</em><em> (</em><em>initializer</em><em> (</em><em>callable</em><em>)</em><em>, </em><em>args</em><em> (</em><em>list</em><em>)</em><em>, </em><em>kwargs</em><em> (</em><em>dict</em><em>)</em><em>)</em>) – ASE calculator or routine to call to create calculator. If ‘WFL_CALCULATOR_ARGS’
+<cite>…_INITIALIZER</cite>, or <cite>…_KWARGS</cite> are present in any <cite>Atoms.info</cite> dicts, calculator
+_must_ be a 3-tuple so that those <cite>initializer</cite>, <cite>*args</cite> or <cite>**kwargs</cite> can be used to
+override defaults.</p></li>
 <li><p><strong>properties</strong> (<em>list</em><em>(</em><em>str</em><em>)</em><em>, </em><em>default</em><em> [</em><em>'energy'</em><em>, </em><em>'forces'</em><em>, </em><em>stress'</em><em>]</em>) – Properties to request from calculator. If any are not present after calculation (e.g.
 stress for nonperiodic configurations), a warning will be printed.</p></li>
 <li><p><strong>output_prefix</strong> (<em>str</em><em>, </em><em>default _auto_</em>) – String to prefix info/arrays key names where results will be stored.
@@ -741,6 +783,54 @@ None for SinglePointCalculator instead of info/arrays.</p></li>
 </dd></dl>
 
 </div>
+<div class="section" id="module-wfl.calculators.kpts">
+<span id="wfl-calculators-kpts-module"></span><h2>wfl.calculators.kpts module<a class="headerlink" href="#module-wfl.calculators.kpts" title="Permalink to this heading">#</a></h2>
+<p>Universal k-spacing functions</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.calculators.kpts.universal_kspacing_k_mesh">
+<span class="sig-prename descclassname"><span class="pre">wfl.calculators.kpts.</span></span><span class="sig-name descname"><span class="pre">universal_kspacing_k_mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kspacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kgamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inversion_sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.kpts.universal_kspacing_k_mesh" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate universal kspacing, but never &gt; 1 for pbc False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kspacing</strong> (<em>float</em>) – spacing in reciprocal space (assuming magnitude of reciprical lattice vectors includes factor of 2 pi</p></li>
+<li><p><strong>cell</strong> (<em>ase.cell.Cell</em>) – cell of atomic configuration</p></li>
+<li><p><strong>pbc</strong> (<em>(</em><em>bool</em><em>, </em><em>bool</em><em>, </em><em>bool</em><em>)</em>) – Whether direction is periodic and should be k-point sampled</p></li>
+<li><p><strong>kgamma</strong> (<em>bool</em><em>, </em><em>default True</em>) – use Gamma centered mesh</p></li>
+<li><p><strong>inversion_sym</strong> (<em>bool</em><em>, </em><em>default False</em>) – use inversion symmetry to fold k-points</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>kmesh</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list((float, float, float)) positions of BZ points in reciprocal lattice coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.calculators.kpts.universal_kspacing_n_k">
+<span class="sig-prename descclassname"><span class="pre">wfl.calculators.kpts.</span></span><span class="sig-name descname"><span class="pre">universal_kspacing_n_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kspacing</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.kpts.universal_kspacing_n_k" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate universal kspacing, but never &gt; 1 for pbc False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kspacing</strong> (<em>float</em>) – spacing in reciprocal space (assuming magnitude of reciprical lattice vectors includes factor of 2 pi</p></li>
+<li><p><strong>cell</strong> (<em>ase.cell.Cell</em>) – cell of atomic configuration</p></li>
+<li><p><strong>pbc</strong> (<em>(</em><em>bool</em><em>, </em><em>bool</em><em>, </em><em>bool</em><em>)</em>) – Whether direction is periodic and should be k-point sampled</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>kmesh</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list((float, float, float)) positions of BZ points in reciprocal lattice coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-wfl.calculators.mopac">
 <span id="wfl-calculators-mopac-module"></span><h2>wfl.calculators.mopac module<a class="headerlink" href="#module-wfl.calculators.mopac" title="Permalink to this heading">#</a></h2>
 <p>MOPAC interface</p>
@@ -748,7 +838,8 @@ None for SinglePointCalculator instead of info/arrays.</p></li>
 <dt class="sig sig-object py" id="wfl.calculators.mopac.MOPAC">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wfl.calculators.mopac.</span></span><span class="sig-name descname"><span class="pre">MOPAC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keep_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rundir_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'run_MOPAC_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scratchdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calculator_exec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.mopac.MOPAC" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#wfl.calculators.wfl_fileio_calculator.WFLFileIOCalculator" title="wfl.calculators.wfl_fileio_calculator.WFLFileIOCalculator"><code class="xref py py-class docutils literal notranslate"><span class="pre">WFLFileIOCalculator</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">MOPAC</span></code></p>
-<p>Extension of ASE’s MOPAC claculator so that it can be used by wfl.calculators.generic (mainly each calculation is run in a separate directory)</p>
+<p>Extension of ASE’s MOPAC claculator so that it can be used by wfl.calculators.generic (mainly each
+calculation is run in a separate directory)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="wfl.calculators.mopac.MOPAC.calculate">
 <span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['energy',</span> <span class="pre">'forces']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_changes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['positions',</span> <span class="pre">'numbers',</span> <span class="pre">'cell',</span> <span class="pre">'pbc',</span> <span class="pre">'initial_charges',</span> <span class="pre">'initial_magmoms']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.mopac.MOPAC.calculate" title="Permalink to this definition">#</a></dt>
@@ -785,21 +876,19 @@ or FileIOCalculator.calculate() for the v3.22.1</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="wfl.calculators.utils.handle_nonperiodic">
-<span class="sig-prename descclassname"><span class="pre">wfl.calculators.utils.</span></span><span class="sig-name descname"><span class="pre">handle_nonperiodic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_mixed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.utils.handle_nonperiodic" title="Permalink to this definition">#</a></dt>
-<dd><p>prepare for a calculation by filtering out stress if nonperiodic</p>
+<dt class="sig sig-object py" id="wfl.calculators.utils.parse_genericfileio_profile_argv">
+<span class="sig-prename descclassname"><span class="pre">wfl.calculators.utils.</span></span><span class="sig-name descname"><span class="pre">parse_genericfileio_profile_argv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.utils.parse_genericfileio_profile_argv" title="Permalink to this definition">#</a></dt>
+<dd><p>Parse a command provided as a conventional argv into the separate
+structures that generic file-io calculators use to construct their Profile</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>atoms</strong> (<em>Atoms</em>) – input configuration</p></li>
-<li><p><strong>properties</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – list of properties to calculate</p></li>
-<li><p><strong>allow_mixed</strong> (<em>bool</em><em>, </em><em>default=False</em>) – allow mixed periodicity, ie. not only TTT and FFF</p></li>
-</ul>
+<dd class="field-odd"><p><strong>argv</strong> (<em>list</em><em>(</em><em>str</em><em>)</em>) – command to execute, split into separate arguments (e.g. using shlex.split?)</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>nonperiodic</strong> (<em>bool</em>)</p></li>
-<li><p><strong>use_properties</strong> (<em>list</em>) – list of properties, filtering out stress for nonperiodic systems</p></li>
+<li><p><strong>binary</strong> (<em>str binary to execute</em>)</p></li>
+<li><p><strong>parallel_info</strong> (<em>dict with parallel info, in particular “binary” for mpirun/mpiexec/srun etc,</em>) – and additional fields to reconstruct rest of command line (all fake, depending
+on details of how ASE constructs the final command line</p></li>
 </ul>
 </p>
 </dd>
@@ -810,6 +899,8 @@ or FileIOCalculator.calculate() for the v3.22.1</p>
 <dt class="sig sig-object py" id="wfl.calculators.utils.save_results">
 <span class="sig-prename descclassname"><span class="pre">wfl.calculators.utils.</span></span><span class="sig-name descname"><span class="pre">save_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.utils.save_results" title="Permalink to this definition">#</a></dt>
 <dd><p>saves results of a calculation in a SinglePointCalculator or info/arrays keys</p>
+<p>If atoms.info[“__calculator_results_saved”] is true, assume that results have already been saved
+and instead just remove this key and continue</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -870,13 +961,18 @@ ASE calculation operations (writing input, executing, reading_results)</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="wfl.calculators.vasp.Vasp.param_dict_of_key">
+<span class="sig-name descname"><span class="pre">param_dict_of_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.vasp.Vasp.param_dict_of_key" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="wfl.calculators.vasp.Vasp.per_config_restore">
 <span class="sig-name descname"><span class="pre">per_config_restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.vasp.Vasp.per_config_restore" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="wfl.calculators.vasp.Vasp.per_config_setup">
-<span class="sig-name descname"><span class="pre">per_config_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonperiodic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.vasp.Vasp.per_config_setup" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">per_config_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atoms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.calculators.vasp.Vasp.per_config_setup" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -956,11 +1052,10 @@ can’t ever be sure it’s not needed anymore, so let’s not do it automatical
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="wfl.autoparallelize.html"
@@ -980,10 +1075,7 @@ can’t ever be sure it’s not needed anymore, so let’s not do it automatical
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -991,6 +1083,7 @@ can’t ever be sure it’s not needed anymore, so let’s not do it automatical
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1037,6 +1130,11 @@ can’t ever be sure it’s not needed anymore, so let’s not do it automatical
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.generic.calculate"><code class="docutils literal notranslate"><span class="pre">calculate()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.calculators.kpts">wfl.calculators.kpts module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.kpts.universal_kspacing_k_mesh"><code class="docutils literal notranslate"><span class="pre">universal_kspacing_k_mesh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.kpts.universal_kspacing_n_k"><code class="docutils literal notranslate"><span class="pre">universal_kspacing_n_k()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.calculators.mopac">wfl.calculators.mopac module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.mopac.MOPAC"><code class="docutils literal notranslate"><span class="pre">MOPAC</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.mopac.MOPAC.calculate"><code class="docutils literal notranslate"><span class="pre">MOPAC.calculate()</span></code></a></li>
@@ -1047,7 +1145,7 @@ can’t ever be sure it’s not needed anymore, so let’s not do it automatical
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.calculators.utils">wfl.calculators.utils module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.clean_rundir"><code class="docutils literal notranslate"><span class="pre">clean_rundir()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.handle_nonperiodic"><code class="docutils literal notranslate"><span class="pre">handle_nonperiodic()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.parse_genericfileio_profile_argv"><code class="docutils literal notranslate"><span class="pre">parse_genericfileio_profile_argv()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.utils.save_results"><code class="docutils literal notranslate"><span class="pre">save_results()</span></code></a></li>
 </ul>
 </li>
@@ -1055,6 +1153,7 @@ can’t ever be sure it’s not needed anymore, so let’s not do it automatical
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp"><code class="docutils literal notranslate"><span class="pre">Vasp</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.calculate"><code class="docutils literal notranslate"><span class="pre">Vasp.calculate()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.default_parameters"><code class="docutils literal notranslate"><span class="pre">Vasp.default_parameters</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.param_dict_of_key"><code class="docutils literal notranslate"><span class="pre">Vasp.param_dict_of_key()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.per_config_restore"><code class="docutils literal notranslate"><span class="pre">Vasp.per_config_restore()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.per_config_setup"><code class="docutils literal notranslate"><span class="pre">Vasp.per_config_setup()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.calculators.vasp.Vasp.wfl_generic_num_inputs_per_python_subprocess"><code class="docutils literal notranslate"><span class="pre">Vasp.wfl_generic_num_inputs_per_python_subprocess</span></code></a></li>
@@ -1093,6 +1192,7 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -1112,8 +1212,8 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

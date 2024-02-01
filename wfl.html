@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -18,22 +18,23 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -41,7 +42,7 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'wfl';</script>
     <link rel="shortcut icon" href="_static/wf_logo_final.png"/>
@@ -58,7 +59,15 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -93,11 +102,14 @@
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -112,9 +124,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -124,12 +138,23 @@
       
     
     
-    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="workflow  documentation - Home"/>
+    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="workflow  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="first_example.html">First Example</a></li>
@@ -306,20 +331,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -385,7 +412,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <div class="section" id="wfl-package">
 <h1>wfl package<a class="headerlink" href="#wfl-package" title="Permalink to this heading">#</a></h1>
@@ -426,12 +453,21 @@ document.write(`
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.autoparallelize.html#module-wfl.autoparallelize.utils">wfl.autoparallelize.utils module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.utils.get_remote_info"><code class="docutils literal notranslate"><span class="pre">get_remote_info()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.utils.get_root_global_seed"><code class="docutils literal notranslate"><span class="pre">get_root_global_seed()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.utils.grouper"><code class="docutils literal notranslate"><span class="pre">grouper()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.utils.items_inputs_generator"><code class="docutils literal notranslate"><span class="pre">items_inputs_generator()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.utils.set_autopara_per_item_info"><code class="docutils literal notranslate"><span class="pre">set_autopara_per_item_info()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.autoparallelize.html#module-wfl.autoparallelize">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.autoparallelize.html#module-wfl.autoparallelize">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.AutoparaInfo"><code class="docutils literal notranslate"><span class="pre">AutoparaInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.AutoparaInfo.update_defaults"><code class="docutils literal notranslate"><span class="pre">AutoparaInfo.update_defaults()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.RemoteInfo"><code class="docutils literal notranslate"><span class="pre">RemoteInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.autoparallelize"><code class="docutils literal notranslate"><span class="pre">autoparallelize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.autoparallelize_docstring"><code class="docutils literal notranslate"><span class="pre">autoparallelize_docstring()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="wfl.calculators.html">wfl.calculators package</a><ul>
@@ -482,6 +518,11 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.generic.calculate"><code class="docutils literal notranslate"><span class="pre">calculate()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.calculators.html#module-wfl.calculators.kpts">wfl.calculators.kpts module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.kpts.universal_kspacing_k_mesh"><code class="docutils literal notranslate"><span class="pre">universal_kspacing_k_mesh()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.kpts.universal_kspacing_n_k"><code class="docutils literal notranslate"><span class="pre">universal_kspacing_n_k()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.calculators.html#module-wfl.calculators.mopac">wfl.calculators.mopac module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.mopac.MOPAC"><code class="docutils literal notranslate"><span class="pre">MOPAC</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.mopac.MOPAC.calculate"><code class="docutils literal notranslate"><span class="pre">MOPAC.calculate()</span></code></a></li>
@@ -492,7 +533,7 @@ document.write(`
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.calculators.html#module-wfl.calculators.utils">wfl.calculators.utils module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.utils.clean_rundir"><code class="docutils literal notranslate"><span class="pre">clean_rundir()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.utils.handle_nonperiodic"><code class="docutils literal notranslate"><span class="pre">handle_nonperiodic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.utils.parse_genericfileio_profile_argv"><code class="docutils literal notranslate"><span class="pre">parse_genericfileio_profile_argv()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.utils.save_results"><code class="docutils literal notranslate"><span class="pre">save_results()</span></code></a></li>
 </ul>
 </li>
@@ -500,6 +541,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.vasp.Vasp"><code class="docutils literal notranslate"><span class="pre">Vasp</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.vasp.Vasp.calculate"><code class="docutils literal notranslate"><span class="pre">Vasp.calculate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.vasp.Vasp.default_parameters"><code class="docutils literal notranslate"><span class="pre">Vasp.default_parameters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.vasp.Vasp.param_dict_of_key"><code class="docutils literal notranslate"><span class="pre">Vasp.param_dict_of_key()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.vasp.Vasp.per_config_restore"><code class="docutils literal notranslate"><span class="pre">Vasp.per_config_restore()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.vasp.Vasp.per_config_setup"><code class="docutils literal notranslate"><span class="pre">Vasp.per_config_setup()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="wfl.calculators.html#wfl.calculators.vasp.Vasp.wfl_generic_num_inputs_per_python_subprocess"><code class="docutils literal notranslate"><span class="pre">Vasp.wfl_generic_num_inputs_per_python_subprocess</span></code></a></li>
@@ -545,26 +587,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.cli.html#wfl-cli-dft-convergence-test-module">wfl.cli.dft_convergence_test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.cli.html#module-wfl.cli.gap_rss_iter_fit">wfl.cli.gap_rss_iter_fit module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.RSS_minima_diverse"><code class="docutils literal notranslate"><span class="pre">RSS_minima_diverse()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.Z_label"><code class="docutils literal notranslate"><span class="pre">Z_label()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.calc_descriptors_to_file"><code class="docutils literal notranslate"><span class="pre">calc_descriptors_to_file()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.create_all_buildcell"><code class="docutils literal notranslate"><span class="pre">create_all_buildcell()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.do_fit_and_test"><code class="docutils literal notranslate"><span class="pre">do_fit_and_test()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.evaluate_iter_and_fit_all"><code class="docutils literal notranslate"><span class="pre">evaluate_iter_and_fit_all()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.evaluate_ref"><code class="docutils literal notranslate"><span class="pre">evaluate_ref()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.flat_histo_then_by_desc"><code class="docutils literal notranslate"><span class="pre">flat_histo_then_by_desc()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.get_buildcell_input_files"><code class="docutils literal notranslate"><span class="pre">get_buildcell_input_files()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.get_old_fitting_files"><code class="docutils literal notranslate"><span class="pre">get_old_fitting_files()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.increment_active_iter"><code class="docutils literal notranslate"><span class="pre">increment_active_iter()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.is_elemental"><code class="docutils literal notranslate"><span class="pre">is_elemental()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.load_old_descriptors_arrays"><code class="docutils literal notranslate"><span class="pre">load_old_descriptors_arrays()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.print_log"><code class="docutils literal notranslate"><span class="pre">print_log()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.process_cur_iter"><code class="docutils literal notranslate"><span class="pre">process_cur_iter()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.select_fitting_and_testing_for_groups"><code class="docutils literal notranslate"><span class="pre">select_fitting_and_testing_for_groups()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.cli.html#wfl.cli.gap_rss_iter_fit.step_startup"><code class="docutils literal notranslate"><span class="pre">step_startup()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.cli.html#wfl-cli-gap-rss-iter-fit-module">wfl.cli.gap_rss_iter_fit module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.cli.html#module-wfl.cli">Module contents</a></li>
 </ul>
 </li>
@@ -614,6 +637,10 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="wfl.fit.html#wfl.fit.error.natural_sort"><code class="docutils literal notranslate"><span class="pre">natural_sort()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="wfl.fit.html#wfl.fit.error.select_units"><code class="docutils literal notranslate"><span class="pre">select_units()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="wfl.fit.html#wfl.fit.error.value_error_scatter"><code class="docutils literal notranslate"><span class="pre">value_error_scatter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.fit.html#module-wfl.fit.mace">wfl.fit.mace module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wfl.fit.html#wfl.fit.mace.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.fit.html#module-wfl.fit.utils">wfl.fit.utils module</a><ul>
@@ -670,11 +697,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="wfl.generate.html#wfl.generate.normal_modes.sample_normal_modes"><code class="docutils literal notranslate"><span class="pre">sample_normal_modes()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.generate.html#module-wfl.generate.optimize">wfl.generate.optimize module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="wfl.generate.html#wfl.generate.optimize.optimize"><code class="docutils literal notranslate"><span class="pre">optimize()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="wfl.generate.html#wfl.generate.optimize.subselect_from_traj"><code class="docutils literal notranslate"><span class="pre">subselect_from_traj()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="wfl.generate.html#wfl-generate-optimize-module">wfl.generate.optimize module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.generate.html#module-wfl.generate.phonopy">wfl.generate.phonopy module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="wfl.generate.html#wfl.generate.phonopy.phonopy"><code class="docutils literal notranslate"><span class="pre">phonopy()</span></code></a></li>
 </ul>
@@ -811,10 +834,6 @@ document.write(`
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.utils.html#module-wfl.utils.round_sig_figs">wfl.utils.round_sig_figs module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="wfl.utils.html#wfl.utils.round_sig_figs.round_sig_figs"><code class="docutils literal notranslate"><span class="pre">round_sig_figs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="wfl.utils.html#module-wfl.utils.vector_utils">wfl.utils.vector_utils module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="wfl.utils.html#wfl.utils.vector_utils.random_three_vector"><code class="docutils literal notranslate"><span class="pre">random_three_vector()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wfl.utils.html#module-wfl.utils.version">wfl.utils.version module</a><ul>
@@ -1004,7 +1023,8 @@ to appending to single file or top level list of configs.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>descriptor</strong> (<em>dict</em>) – nested structure with some contained dicts that have ‘sparse_method’ = ‘_2BRN_UNIFORM_FILE_’, and also <code class="docutils literal notranslate"><span class="pre">n_sparse</span></code>, <code class="docutils literal notranslate"><span class="pre">exponents</span></code>, <code class="docutils literal notranslate"><span class="pre">cutoff</span></code></p></li>
+<li><p><strong>descriptor</strong> (<em>dict</em>) – nested structure with some contained dicts that have ‘sparse_method’ = ‘_2BRN_UNIFORM_FILE_’,
+and also <code class="docutils literal notranslate"><span class="pre">n_sparse</span></code>, <code class="docutils literal notranslate"><span class="pre">exponents</span></code>, <code class="docutils literal notranslate"><span class="pre">cutoff</span></code></p></li>
 <li><p><strong>ident</strong> (<em>str</em><em>, </em><em>default ''</em>) – identifier string to add to sparsepoints filename</p></li>
 <li><p><strong>desc_i</strong> (<em>int</em><em>, </em><em>default 0</em>) – offset to descriptor number in filename</p></li>
 </ul>
@@ -1097,11 +1117,10 @@ dicts with keys ‘cutoff’, ‘cutoff_transition_width’, and ‘atom_gaussia
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="modules.html"
@@ -1121,10 +1140,7 @@ dicts with keys ‘cutoff’, ‘cutoff_transition_width’, and ‘atom_gaussia
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1132,6 +1148,7 @@ dicts with keys ‘cutoff’, ‘cutoff_transition_width’, and ‘atom_gaussia
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1190,6 +1207,7 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -1209,8 +1227,8 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

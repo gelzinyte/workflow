@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -18,22 +18,23 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -41,7 +42,7 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'wfl.fit';</script>
     <link rel="shortcut icon" href="_static/wf_logo_final.png"/>
@@ -58,7 +59,15 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -93,11 +102,14 @@
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -112,9 +124,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -124,12 +138,23 @@
       
     
     
-    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="workflow  documentation - Home"/>
+    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="workflow  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="first_example.html">First Example</a></li>
@@ -306,20 +331,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -364,6 +391,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.value_error_scatter"><code class="docutils literal notranslate"><span class="pre">value_error_scatter()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.mace">wfl.fit.mace module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.mace.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.utils">wfl.fit.utils module</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.ace_fit_jl_path"><code class="docutils literal notranslate"><span class="pre">ace_fit_jl_path()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.utils.copy_properties"><code class="docutils literal notranslate"><span class="pre">copy_properties()</span></code></a></li>
@@ -380,7 +411,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <div class="section" id="wfl-fit-package">
 <h1>wfl.fit package<a class="headerlink" href="#wfl-fit-package" title="Permalink to this heading">#</a></h1>
@@ -473,7 +504,7 @@ Alternatively set by <cite>WFL_ACE_FIT_COMMAND</cite> env var.</p></li>
 <li><p><strong>run_dir</strong> (<em>str</em><em> or </em><em>Path</em><em>, </em><em>default '.'</em>) – directory to run in</p></li>
 <li><p><strong>dry_run</strong> (<em>bool</em><em>, </em><em>default False</em>) – do a dry run, which returns the matrix size, rather than the potential name</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default True</em>) – print verbose output</p></li>
-<li><p><strong>remote_info</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">wfl.autoparallelize.RemoteInfo</span></code>, or ‘_IGNORE’ or None) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
+<li><p><strong>remote_info</strong> (dict or <a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.RemoteInfo" title="wfl.autoparallelize.RemoteInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">wfl.autoparallelize.RemoteInfo</span></code></a>, or ‘_IGNORE’ or None) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
 constructor which triggers running job in separately queued job on remote machine.  If None,
 will try to use env var WFL_EXPYRE_INFO used (see above). ‘_IGNORE’ is for
 internal use, to ensure that remotely running job does not itself attempt to spawn another
@@ -558,7 +589,7 @@ e.g. <cite>julia $HOME/.julia/packages/ACE1pack/ChRvA/scripts/ace_fit.jl</cite> 
 Alternatively set by WFL_ACE_FIT_COMMAND.</p></li>
 <li><p><strong>dry_run</strong> (<em>bool</em><em>, </em><em>default False</em>) – do a dry run, which returns the matrix size, rather than the potential file path</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default True</em>) – print verbose output</p></li>
-<li><p><strong>remote_info</strong> (dict or <code class="xref py py-class docutils literal notranslate"><span class="pre">wfl.autoparallelize.RemoteInfo</span></code>, or ‘_IGNORE’ or None) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
+<li><p><strong>remote_info</strong> (dict or <a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.RemoteInfo" title="wfl.autoparallelize.RemoteInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">wfl.autoparallelize.RemoteInfo</span></code></a>, or ‘_IGNORE’ or None) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
 constructor which triggers running job in separately queued job on remote machine.  If None,
 will try to use env var WFL_EXPYRE_INFO used (see below). ‘_IGNORE’ is for
 internal use, to ensure that remotely running job does not itself attempt to spawn another
@@ -624,7 +655,7 @@ keys in Atoms.info, in addition to overall average _ALL_ category.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.fit.error.errors_dumps">
-<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">errors_dumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RMSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.errors_dumps" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.error.</span></span><span class="sig-name descname"><span class="pre">errors_dumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">errors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RMSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.error.errors_dumps" title="Permalink to this definition">#</a></dt>
 <dd><p>converts errors dictionary to dataframe and prints nicely.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -711,6 +742,48 @@ Where each tuple containes units lable and conversion factor from ASE-default un
 </dd></dl>
 
 </div>
+<div class="section" id="module-wfl.fit.mace">
+<span id="wfl-fit-mace-module"></span><h2>wfl.fit.mace module<a class="headerlink" href="#module-wfl.fit.mace" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="wfl.fit.mace.fit">
+<span class="sig-prename descclassname"><span class="pre">wfl.fit.mace.</span></span><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fitting_configs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mace_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mace_fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mace_fit_cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_property_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'REF_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_checkpoint_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_configs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_configs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_if_present</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remote_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_for_results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.fit.mace.fit" title="Permalink to this definition">#</a></dt>
+<dd><blockquote>
+<div><p>Fit MACE model.</p>
+</div></blockquote>
+<p><strong>Environment Variables</strong></p>
+<ul class="simple">
+<li><p>WFL_MACE_FIT_COMMAND: command to execute mace fit, e.g.
+<a href="#id1"><span class="problematic" id="id2">``</span></a>python $HOME/mace/scripts/run_train.py ``</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fitting_configs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.ConfigSet" title="wfl.configset.ConfigSet"><em>ConfigSet</em></a>) – set of configurations to fit (mace param “train_file”)</p></li>
+<li><p><strong>mace_name</strong> (<em>str</em>) – name of MACE label</p></li>
+<li><p><strong>mace_fit_params</strong> (<em>dict</em>) – parameters for fitting a MACE model.</p></li>
+<li><p><strong>mace_fit_cmd</strong> (<em>str</em><em>, </em><em>default None.</em>) – command for excecuting the MACE fitting. (For example, “python ~/path_to_mace_cripts/run_train.py”)
+Alternatively set by <cite>WFL_MACE_FIT_COMMAND</cite> env var.</p></li>
+<li><p><strong>ref_property_prefix</strong> (str, default “<a href="#id3"><span class="problematic" id="id4">REF_</span></a>”) – string prefix added to atoms.info/arrays keys (energy, forces, virial, stress)</p></li>
+<li><p><strong>prev_checkpoint_file</strong> (<em>str</em><em>, </em><em>default None</em>) – Previous checkpoint file to restart from.</p></li>
+<li><p><strong>valid_configs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.ConfigSet" title="wfl.configset.ConfigSet"><em>ConfigSet</em></a><em>, </em><em>default None</em>) – set of configurations to validate (mace param “valid_file”)</p></li>
+<li><p><strong>test_configs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.ConfigSet" title="wfl.configset.ConfigSet"><em>ConfigSet</em></a><em>, </em><em>default None</em>) – set of configurtions to test (mace param “test_file”)</p></li>
+<li><p><strong>skip_if_present</strong> (<em>bool</em><em>, </em><em>default True</em>) – skip if final MACE file exists in expected place</p></li>
+<li><p><strong>run_dir</strong> (<em>str</em><em>, </em><em>default '.'</em>) – directory to run fitting in</p></li>
+<li><p><strong>verbose</strong> (<em>bool default True</em>) – verbose output</p></li>
+<li><p><strong>dry_run</strong> (<em>bool</em><em>, </em><em>default False</em>) – do a dry run, and returns fitting command including keywords</p></li>
+<li><p><strong>remote_info</strong> (<em>dict</em><em> or </em><em>wfl.autoparallelize.utils.RemoteInfo</em><em>, or </em><em>'_IGNORE'</em><em> or </em><em>None</em>) – If present and not None and not ‘_IGNORE’, RemoteInfo or dict with kwargs for RemoteInfo
+constructor which triggers running job in separately queued job on remote machine.  If None,
+will try to use env var WFL_EXPYRE_INFO used (see below). ‘_IGNORE’ is for
+internal use, to ensure that remotely running job does not itself attempt to spawn another
+remotely running job.</p></li>
+<li><p><strong>remote_label</strong> (<em>str</em><em>, </em><em>default None</em>) – label to match in WFL_EXPYRE_INFO</p></li>
+<li><p><strong>wait_for_results</strong> (<em>bool</em><em>, </em><em>default True</em>) – wait for results of remotely executed job, otherwise return after starting job</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-wfl.fit.utils">
 <span id="wfl-fit-utils-module"></span><h2>wfl.fit.utils module<a class="headerlink" href="#module-wfl.fit.utils" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
@@ -769,11 +842,10 @@ attached calculator (e.g. SinglePointCalculator)</p></li>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="wfl.descriptors.html"
@@ -793,10 +865,7 @@ attached calculator (e.g. SinglePointCalculator)</p></li>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -804,6 +873,7 @@ attached calculator (e.g. SinglePointCalculator)</p></li>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -827,6 +897,10 @@ attached calculator (e.g. SinglePointCalculator)</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.natural_sort"><code class="docutils literal notranslate"><span class="pre">natural_sort()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.select_units"><code class="docutils literal notranslate"><span class="pre">select_units()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.error.value_error_scatter"><code class="docutils literal notranslate"><span class="pre">value_error_scatter()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.mace">wfl.fit.mace module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl.fit.mace.fit"><code class="docutils literal notranslate"><span class="pre">fit()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-wfl.fit.utils">wfl.fit.utils module</a><ul class="nav section-nav flex-column">
@@ -857,6 +931,7 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -876,8 +951,8 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

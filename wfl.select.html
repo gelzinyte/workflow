@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -18,22 +18,23 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -41,7 +42,7 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'wfl.select';</script>
     <link rel="shortcut icon" href="_static/wf_logo_final.png"/>
@@ -58,7 +59,15 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -93,11 +102,14 @@
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -112,9 +124,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -124,12 +138,23 @@
       
     
     
-    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="workflow  documentation - Home"/>
+    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="workflow  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="first_example.html">First Example</a></li>
@@ -306,20 +331,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -385,7 +412,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <div class="section" id="wfl-select-package">
 <h1>wfl.select package<a class="headerlink" href="#wfl-select-package" title="Permalink to this heading">#</a></h1>
@@ -396,7 +423,7 @@ document.write(`
 <span id="wfl-select-by-descriptor-module"></span><h2>wfl.select.by_descriptor module<a class="headerlink" href="#module-wfl.select.by_descriptor" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.select.by_descriptor.CUR">
-<span class="sig-prename descclassname"><span class="pre">wfl.select.by_descriptor.</span></span><span class="sig-name descname"><span class="pre">CUR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stochastic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stochastic_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.by_descriptor.CUR" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.select.by_descriptor.</span></span><span class="sig-name descname"><span class="pre">CUR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stochastic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.by_descriptor.CUR" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute selection by CUR of descriptors with dot-product, with optional exponentiation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -404,7 +431,7 @@ document.write(`
 <li><p><strong>mat</strong> (<em>np.array</em><em>(</em><em>vec_len</em><em>, </em><em>n_vecs</em><em>) or </em><em>(</em><em>n_vecs</em><em>, </em><em>n_vecs</em><em>)</em>) – rectangular array of descriptors as column vectors or square kernel matrix</p></li>
 <li><p><strong>num</strong> (<em>int</em>) – number to select</p></li>
 <li><p><strong>stochastic</strong> (<em>bool</em><em>, </em><em>default True</em>) – use stochastic selection algorithm</p></li>
-<li><p><strong>stochastic_seed</strong> (<em>int</em><em>, </em><em>default None</em>) – fix seed of random number generator</p></li>
+<li><p><strong>rng</strong> (<em>numpy.random.Generator</em>) – random number generator, required if stochastic</p></li>
 <li><p><strong>exclude_list</strong> (<em>list</em><em>(</em><em>int</em><em>)</em><em>, </em><em>default None</em>) – list of descriptor indices to exclude</p></li>
 </ul>
 </dd>
@@ -419,7 +446,7 @@ document.write(`
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.select.by_descriptor.CUR_conf_global">
-<span class="sig-prename descclassname"><span class="pre">wfl.select.by_descriptor.</span></span><span class="sig-name descname"><span class="pre">CUR_conf_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs_info_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_exp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stochastic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stochastic_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_descriptor_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leverage_score_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.by_descriptor.CUR_conf_global" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.select.by_descriptor.</span></span><span class="sig-name descname"><span class="pre">CUR_conf_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs_info_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_exp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stochastic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_descriptor_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leverage_score_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.by_descriptor.CUR_conf_global" title="Permalink to this definition">#</a></dt>
 <dd><p>Select atoms from a list or iterable using CUR on global (per-config) descriptors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -427,7 +454,7 @@ document.write(`
 <li><p><strong>inputs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.ConfigSet" title="wfl.configset.ConfigSet"><em>ConfigSet</em></a>) – atomic configs to select from</p></li>
 <li><p><strong>outputs</strong> (<a class="reference internal" href="wfl.html#wfl.configset.OutputSpec" title="wfl.configset.OutputSpec"><em>OutputSpec</em></a>) – where to write output to</p></li>
 <li><p><strong>num</strong> (<em>int</em>) – number to select</p></li>
-<li><p><strong>stochastic_seed</strong> (<em>int</em><em>, </em><em>default None</em>) – fix seed of random number generator</p></li>
+<li><p><strong>rng</strong> (<em>int</em><em>, </em><em>default None</em>) – random number generator</p></li>
 <li><p><strong>at_descs</strong> (<em>np.array</em><em>(</em><em>n_descs</em><em>, </em><em>desc_len</em><em>)</em><em>, </em><em>mutually exclusive with at_descs_info_key</em>) – list of descriptor vectors</p></li>
 <li><p><strong>at_descs_info_key</strong> (<em>str</em><em>, </em><em>mutually exclusive with at_descs</em>) – key to Atoms.info dict containing per-config descriptor vector</p></li>
 <li><p><strong>kernel_exp</strong> (<em>float</em><em>, </em><em>default None</em>) – exponent to compute kernel (if other than 1)</p></li>
@@ -452,7 +479,7 @@ actual Atoms objects in inputs, to full machine precision</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.select.by_descriptor.greedy_fps_conf_global">
-<span class="sig-prename descclassname"><span class="pre">wfl.select.by_descriptor.</span></span><span class="sig-name descname"><span class="pre">greedy_fps_conf_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs_info_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_descriptor_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_selected_descs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_N_sq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.by_descriptor.greedy_fps_conf_global" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.select.by_descriptor.</span></span><span class="sig-name descname"><span class="pre">greedy_fps_conf_global</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_descs_info_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_descriptor_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_selected_descs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">O_N_sq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.by_descriptor.greedy_fps_conf_global" title="Permalink to this definition">#</a></dt>
 <dd><p>Select atoms from a list or iterable using greedy farthest point selection on global (per-config) descriptors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -466,6 +493,7 @@ actual Atoms objects in inputs, to full machine precision</p></li>
 <li><p><strong>exclude_list</strong> (<em>iterable</em><em>(</em><em>Atoms</em><em>)</em>) – list of Atoms to exclude from selection by descriptor</p></li>
 <li><p><strong>prev_selected_descs</strong> (<em>np.array</em><em>(</em><em>n_prev_descs</em><em>, </em><em>desc_len</em><em>)</em><em>, </em><em>default False</em>) – if present, list of previously selected descriptors to also be farthest from</p></li>
 <li><p><strong>O_N_sq</strong> (<em>bool</em><em>, </em><em>default False</em>) – use O(N^2) algorithm with smaller prefactor</p></li>
+<li><p><strong>rng</strong> (<em>numpy.random.Generator</em>) – random number generator</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default False</em>) – more verbose output</p></li>
 </ul>
 </dd>
@@ -535,7 +563,7 @@ indices into enumerate(inputs)</p></li>
 <span id="wfl-select-flat-histogram-module"></span><h2>wfl.select.flat_histogram module<a class="headerlink" href="#module-wfl.select.flat_histogram" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="wfl.select.flat_histogram.biased_select_conf">
-<span class="sig-prename descclassname"><span class="pre">wfl.select.flat_histogram.</span></span><span class="sig-name descname"><span class="pre">biased_select_conf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_bin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.flat_histogram.biased_select_conf" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">wfl.select.flat_histogram.</span></span><span class="sig-name descname"><span class="pre">biased_select_conf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_bin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wfl.select.flat_histogram.biased_select_conf" title="Permalink to this definition">#</a></dt>
 <dd><p>select configurations by Boltzmann biased flat histogram on some quantity in Atoms.info</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -544,6 +572,7 @@ indices into enumerate(inputs)</p></li>
 <li><p><strong>output</strong> (<a class="reference internal" href="wfl.html#wfl.configset.OutputSpec" title="wfl.configset.OutputSpec"><em>OutputSpec</em></a>) – output configurations</p></li>
 <li><p><strong>num</strong> (<em>int</em>) – number of configs to select</p></li>
 <li><p><strong>info_field</strong> (<em>string</em>) – Atoms.info key for quantity by which to do flat histogram and Boltzmann bias</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em>) – random number generator</p></li>
 <li><p><strong>kT</strong> (<em>float</em><em>, </em><em>default -1</em>) – Boltzmann bias temperature, &lt;= 0 to not bias
 [kT] should have the same unit as the “info_field” parameter</p></li>
 <li><p><strong>bins</strong> (<em>np.histogram bins argument</em><em>, </em><em>default 'auto'</em>) – argument to pass to np.histogram</p></li>
@@ -677,11 +706,10 @@ multiple outputs for a single input, this cannot be done right now</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="wfl.generate.md_PROTECT.html"
@@ -701,10 +729,7 @@ multiple outputs for a single input, this cannot be done right now</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -712,6 +737,7 @@ multiple outputs for a single input, this cannot be done right now</p>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -770,6 +796,7 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -789,8 +816,8 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>

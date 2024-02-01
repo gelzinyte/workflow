@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -18,22 +18,23 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -41,7 +42,7 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'overview.queued';</script>
     <link rel="shortcut icon" href="_static/wf_logo_final.png"/>
@@ -58,7 +59,15 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -93,11 +102,14 @@
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -112,9 +124,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -124,12 +138,23 @@
       
     
     
-    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/wf_logo_final.png" class="logo__image only-light" alt="workflow  documentation - Home"/>
+    <script>document.write(`<img src="_static/wf_logo_final.png" class="logo__image only-dark" alt="workflow  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="first_example.html">First Example</a></li>
@@ -306,20 +331,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -346,7 +373,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restarts">Restarts</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl-expyre-info-syntax">WFL_EXPYRE_INFO syntax</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keys">Keys</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#values">Values</a></li>
@@ -366,7 +396,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <div class="section" id="functions-as-independently-queued-jobs">
 <h1>Functions as independently queued jobs<a class="headerlink" href="#functions-as-independently-queued-jobs" title="Permalink to this heading">#</a></h1>
@@ -377,6 +407,12 @@ env var <code class="docutils literal notranslate"><span class="pre">WFL_EXPYRE_
 should be executed this way.  Any remote machine to be used requires that the <code class="docutils literal notranslate"><span class="pre">wfl</span></code> python
 module be installed.  If needed, commands needed to make this module available (e.g. setting <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>)
 can be set on a per-machine basis in the <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file mentioned below.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To facilitate restarts of interrupted operations, submitted jobs are cached.  If the code
+executed by the job is changed, this may result in cached but incorrect output being used.
+See <a class="reference internal" href="#sec-example-restarts"><span class="std std-ref">discussion below</span></a>.</p>
+</div>
 <p>In addition, <code class="docutils literal notranslate"><span class="pre">wfl.fit.gap_simple</span></code>, <code class="docutils literal notranslate"><span class="pre">wfl.fit.gap_multistage</span></code>, and <code class="docutils literal notranslate"><span class="pre">wfl.fit.ace</span></code> have been wrapped, as a single
 job each.  The GAP simple fit is controlled by the <code class="docutils literal notranslate"><span class="pre">WFL_GAP_SIMPLE_FIT_REMOTEINFO</span></code> env var.  Setting
 this variable will also lead to the multistage fit submitting each simple fit as its own job.
@@ -384,14 +420,17 @@ In addition, the multistage fit can be turned into a single job containing all t
 with the <code class="docutils literal notranslate"><span class="pre">WFL_GAP_MULTISTAGE_FIT_REMOTEINFO</span></code> env var.  In principle, doing each simple fit
 as its own job could enable running committee fits in parallel, but that is not supported right now.
 The env var <code class="docutils literal notranslate"><span class="pre">WFL_ACE_FIT_REMOTEINFO</span></code> is used for ACE fits.</p>
-<p>[NOTE: now that the multistage fit does very little other than the repeated simple fitting, does
-it need its own level of remote job execution]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now that the multistage fit does very little other than the repeated simple fitting, does
+it need its own level of remote job execution?</p>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">*REMOTEINFO</span></code> and <code class="docutils literal notranslate"><span class="pre">WFL_EXPYRE_INFO</span></code> environment variables allow to flexibly control which parts of
 a (likely long and multi-file) fitting script are executed remotely and with what resources without a need
 to change the script itself thus allowing for more flexibility. For simpler scripts, <code class="docutils literal notranslate"><span class="pre">RemoteInfo</span></code> python object
 may be given to the to-be remotely submitted function instead of setting the environment variables.</p>
 <div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<span id="sec-example"></span><h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
 <p>The workflow (<code class="docutils literal notranslate"><span class="pre">do_workflow.py</span></code>) is essentially identical to what you’d otherwise construct:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wfl.configset</span> <span class="kn">import</span> <span class="n">ConfigSet</span><span class="p">,</span> <span class="n">OutputSpec</span>
 <span class="kn">from</span> <span class="nn">wfl.generate_configs.minim</span> <span class="kn">import</span> <span class="n">run</span>
@@ -442,6 +481,8 @@ mentioned below), and a directory called <code class="docutils literal notransla
 the initial <code class="docutils literal notranslate"><span class="pre">_</span></code>, not <code class="docutils literal notranslate"><span class="pre">.</span></code>, so it is more visible) can optionally be created at
 the directory hierarchy level that indicates the scope of the project,
 to separate the jobs database from any other project.</p>
+<div class="section" id="restarts">
+<span id="sec-example-restarts"></span><h3>Restarts<a class="headerlink" href="#restarts" title="Permalink to this heading">#</a></h3>
 <p>Restarts are supposed to be handled automatically - if the workflow script is
 interrupted, just rerun it.  If the entire <code class="docutils literal notranslate"><span class="pre">autoparallelize</span></code> call is complete,
 the default behavior of <code class="docutils literal notranslate"><span class="pre">OutputSpec</span></code> will allow
@@ -455,11 +496,28 @@ pickled deterministically (e.g. <code class="docutils literal notranslate"><span
 argument (obviously only if ignoring it for the purpose of detecting
 duplicate submission is indeed correct).  All functions already ignore the
 <code class="docutils literal notranslate"><span class="pre">outputs</span></code> <code class="docutils literal notranslate"><span class="pre">OutputSpec</span></code> argument.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The hashing mechanism is only designed for interrupted runs, and does
+not detect changes to the called function (or to any functions that
+function calls).  If the code is being modified, the user should erase the
+<code class="docutils literal notranslate"><span class="pre">ExPyRe</span></code> staged job directories, and clean up the <code class="docutils literal notranslate"><span class="pre">sqlite</span></code> database file,
+before rerunning.  Using a per-project <code class="docutils literal notranslate"><span class="pre">_expyre</span></code> directory makes this
+easier, since the database file can simply be erased, otherwise the <code class="docutils literal notranslate"><span class="pre">xpr</span></code> command
+line tool needs to be used to delete the previously created jobs.</p>
+<p>Note that this is only relevant to incomplete autoparallelized
+operations, since any completed operation (once all the remote job outputs have
+been gathered into the location specified in the <code class="docutils literal notranslate"><span class="pre">OutputSpec</span></code>) no longer depends on
+anything <code class="docutils literal notranslate"><span class="pre">ExPyRe</span></code>-related.  See also the warning in the
+<code class="docutils literal notranslate"><span class="pre">OutputSpec</span></code> <a class="reference internal" href="overview.configset.html"><span class="doc std std-doc">documentation</span></a>.</p>
+</div>
+</div>
 </div>
 <div class="section" id="wfl-expyre-info-syntax">
 <h2>WFL_EXPYRE_INFO syntax<a class="headerlink" href="#wfl-expyre-info-syntax" title="Permalink to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">WFL_EXPYRE_INFO</span></code> variable contains a JSON or the name of a file that contains a JSON.  The JSON encodes a dict with keys
-indicating particular function calls, and values containing arguments for constructing <a class="reference internal" href="#wfl.autoparallelize.RemoteInfo"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">RemoteInfo</span></code></span></a> objects.</p>
+indicating particular function calls, and values containing arguments for constructing
+<a class="reference internal" href="wfl.autoparallelize.html#wfl.autoparallelize.remoteinfo.RemoteInfo" title="wfl.autoparallelize.remoteinfo.RemoteInfo"><span class="xref myst py py-class"><code class="docutils literal notranslate"><span class="pre">RemoteInfo</span></code></span></a> objects.</p>
 <div class="section" id="keys">
 <h3>Keys<a class="headerlink" href="#keys" title="Permalink to this heading">#</a></h3>
 <p>Each key consist of a comma separated list of <code class="docutils literal notranslate"><span class="pre">remote_label</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;end_of_path_to_file::function_name&quot;</span></code>.</p>
@@ -519,11 +577,10 @@ in path):</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="overview.parallelisation.html"
@@ -543,10 +600,7 @@ in path):</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -555,13 +609,17 @@ in path):</p>
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restarts">Restarts</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wfl-expyre-info-syntax">WFL_EXPYRE_INFO syntax</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keys">Keys</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#values">Values</a></li>
@@ -593,6 +651,7 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   
   <div class="footer-item">
     
+
   </div>
   
   <div class="footer-item">
@@ -612,8 +671,8 @@ By N. Bernstein, T. K. Stenczel, E. Gelzinyte
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
