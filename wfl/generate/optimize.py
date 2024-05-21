@@ -93,7 +93,11 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
 
     if keep_symmetry:
         # noinspection PyUnresolvedReferences,PyUnresolvedReferences
-        from ase.spacegroup.symmetrize import FixSymmetry
+        try:
+            from ase.constraints import FixSymmetry
+        except ImportError:
+            # fall back to previous import location (pre MR 3288)
+            from ase.spacegroup.symmetrize import FixSymmetry
 
     all_trajs = []
 
@@ -240,5 +244,6 @@ def subselect_from_traj(traj, subselect=None):
         return traj[-1]
     elif subselect == "last_converged":
         return traj[-1] if (traj[-1].info["optimize_config_type"] == "optimize_last_converged") else None
+
     raise RuntimeError(f'Subselecting confgs from trajectory with rule '
                        f'"subselect={subselect}" is not yet implemented')

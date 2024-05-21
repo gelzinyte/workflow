@@ -51,11 +51,17 @@ def _run_autopara_wrappable(atoms, calculator, properties=None, output_prefix='_
     except Exception as exc:
         # if calculator constructor failed, it may still be fine if every atoms object has
         # enough info to construct its own calculator, but we won't know until later
-        calculator_failure_message = str(exc)
+        calculator_failure_message = f"(exc)\n{traceback.format_exc()}"
         calculator_default = None
 
     if output_prefix == '_auto_':
-        output_prefix = calculator.__class__.__name__ + '_'
+        if isinstance(calculator, tuple):
+            # constructor, get name directly
+            calc_class = calculator[0].__name__
+        else:
+            # calculator object, get name from class
+            calc_class = calculator.__class__.__name__
+        output_prefix = calc_class + '_'
 
     at_out = []
     for at in atoms_to_list(atoms):

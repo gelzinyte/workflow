@@ -32,7 +32,7 @@ export ASE_VASP_COMMAND_GAMMA=vasp.gamma.serial
 export PYTEST_VASP_POTCAR_DIR=$VASP_PATH/pot/rev_54/PBE
 # QE
 module load dft/pwscf
-export PYTEST_WFL_ASE_ESPRESSO_COMMAND="mpirun -np 1 pw.x"
+export PYTEST_WFL_ASE_ESPRESSO_COMMAND="env MPIRUN_EXTRA_ARGS='-np 1' pw.x"
 # no ORCA
 
 export OPENBLAS_NUM_THREADS=1
@@ -66,7 +66,7 @@ echo "summary line $l"
 # ===== 152 passed, 17 skipped, 3 xpassed, 78 warnings in 4430.81s (1:13:50) =====
 lp=$( echo $l | sed -E -e 's/ in .*//' -e 's/\s*,\s*/\n/g' )
 
-declare -A expected_n=( ["passed"]="163" ["skipped"]="21" ["warnings"]=803 ["xfailed"]=2 ["xpassed"]=1 )
+declare -A expected_n=( ["passed"]="164" ["skipped"]="21" ["warnings"]=803 ["xfailed"]=2 ["xpassed"]=1 )
 IFS=$'\n'
 for out in $lp; do
     out_n=$(echo $out | sed -e 's/^=* //' -e 's/ .*//' -e 's/,//')
