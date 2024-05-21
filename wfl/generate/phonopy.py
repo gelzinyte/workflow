@@ -27,7 +27,7 @@ def _run_autopara_wrappable(atoms, displacements, strain_displs, ph2_supercell, 
         list of deformation gradient magnitudes to use
     ph2_supercell: int or int 3-vector or 3x3 matrix
         supercell to use for harmonic force constant displacements
-    ph2_supercell: int or int 3-vector or 3x3 matrix, default None
+    ph3_supercell: int or int 3-vector or 3x3 matrix, default None
         if not None, supercell to use for cubic force constant displacements
     pair_cutoff: float, default None
         if not None, max distance between pairs of atoms displaced for cubic force constants
