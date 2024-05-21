@@ -19,7 +19,7 @@ from .utils import parse_genericfileio_profile_argv
 
 # NOMAD compatible, see https://nomad-lab.eu/prod/rae/gui/uploads
 _default_keep_files = ["control.in", "geometry.in", "aims.out"]
-_default_properties = ["energy", "forces", "stress"]
+_default_properties = ["energy", "forces", "stress", "free_energy"]
 
 
 class Aims(WFLFileIOCalculator, ASE_Aims):
@@ -55,7 +55,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
     **kwargs: arguments for ase.calculators.aims.Aims
         See https://wiki.fysik.dtu.dk/ase/_modules/ase/calculators/aims.html.
     """
-    implemented_properties = ["energy", "forces", "stress"]
+    implemented_properties = ["energy", "forces", "stress", "free_energy", "stresses", "dipole", "magmom"]
 
     # new default value of num_inputs_per_python_subprocess for calculators.generic,
     # to override that function's built-in default of 10
