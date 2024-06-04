@@ -55,7 +55,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
     **kwargs: arguments for ase.calculators.aims.Aims
         See https://wiki.fysik.dtu.dk/ase/_modules/ase/calculators/aims.html.
     """
-    implemented_properties = ["energy", "forces", "stress", "free_energy", "stresses", "dipole", "magmom"]
+    implemented_properties = ["energy", "forces", "stress", "free_energy", "stresses", "dipole", "magmom", "polarization"]
 
     # new default value of num_inputs_per_python_subprocess for calculators.generic,
     # to override that function's built-in default of 10
@@ -87,6 +87,12 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
         # so let's make a copy of the initial parameters
         self.initial_parameters = deepcopy(self.parameters)
 
+        #potentially for polarization calculation
+        self.extra_results = {}
+        self.extra_results["atoms"] = {}
+        self.extra_results["config"] = {}
+
+
     def calculate(self, atoms=None, properties=_default_properties, system_changes=all_changes):
         """Do the calculation.
 
@@ -111,11 +117,21 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
         # this may modify self.parameters, will be reset to the initial ones after calculation
         self._setup_calc_params()
 
+        if "plarization" in properties:
+            for key, val in self.parameters.items():
+                if "polarization" in key or "polarization" in val:
+                    break
+            else:
+                raise RuntimeError("Polarization was asked for in properties, but not included in aims kwargs")
+
+
         # from WFLFileIOCalculator
         self.setup_rundir()
         try:
             super().calculate(atoms=atoms, properties=properties, system_changes=system_changes)
             calculation_succeeded = True
+            if "plarization" in properties:
+                self.read_polarization()
             if 'DFT_FAILED_AIMS' in atoms.info:
                 del atoms.info['DFT_FAILED_AIMS']
         except Exception as exc:
@@ -128,6 +144,23 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
 
             # Reset parameters to what they were when the calculator was initialized.
             self.parameters = deepcopy(self.initial_parameters)
+
+    def read_polarization(self):
+
+        regex_patt = re.compile("(?:Cartesian Polarization)\s+(-?[\d.E-]+)\s+(-?[\d.E-]+)\s+(-?[\d.E-]+)")
+
+        with open(aims_output_file, 'r') as f:
+            lines = f.readlines()
+            for line in lines:
+                if "Cartesian Polarization" in line:
+                    re_match = regex_patt.search(line)
+                    polarization = np.array([float(mm) for mm in re_match.groups()])
+                    break
+            else:
+                raise RuntimeError("No polarization found")
+
+        self.extra_results["polarization"] = polarization
+
 
     def _setup_calc_params(self):
         """
