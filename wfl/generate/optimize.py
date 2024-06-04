@@ -48,7 +48,7 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
     fmax: float, default 1e-3
         force convergence tolerance
     smax: float, default None
-        stress convergence tolerance, default from fmax
+        stress convergence tolerance, default equal to smax 
     steps: int, default 1000
         max number of steps
     pressure: None / float / tuple
