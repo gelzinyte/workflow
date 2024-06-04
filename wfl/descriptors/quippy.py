@@ -7,7 +7,6 @@ from ase.atoms import Atoms
 try:
     from quippy.descriptors import Descriptor
 except ModuleNotFoundError as exc:
-    warnings.warn("quippy.descriptors module not found, install with 'python3 -m pip install quippy-ase'")
     Descriptor = None
 
 from wfl.autoparallelize import autoparallelize, autoparallelize_docstring
