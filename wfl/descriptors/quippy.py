@@ -1,3 +1,4 @@
+import warnings
 import re
 from copy import deepcopy
 
@@ -6,7 +7,8 @@ from ase.atoms import Atoms
 try:
     from quippy.descriptors import Descriptor
 except ModuleNotFoundError as exc:
-    raise RuntimeError("quippy.descriptors module not found, install with 'python3 -m pip install quippy-ase'") from exc
+    warnings.warn("quippy.descriptors module not found, install with 'python3 -m pip install quippy-ase'")
+    Descriptor = None
 
 from wfl.autoparallelize import autoparallelize, autoparallelize_docstring
 from wfl.utils.quip_cli_strings import dict_to_quip_str
@@ -37,6 +39,9 @@ def from_any_to_Descriptor(descriptor_src, verbose=False):
     descs: dict
         dict of Descriptors objects
     """
+
+    if Descriptor is None:
+        raise ModuleNotFounderror("quippy.descriptors module not found, install with 'python3 -m pip install quippy-ase'")
 
     # if not a dict with all keys as None or int, put into a dict with None as key
     if (isinstance(descriptor_src, dict) and all([k is None or isinstance(k, int) for k in descriptor_src])):
