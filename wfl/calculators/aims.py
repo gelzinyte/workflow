@@ -2,11 +2,13 @@
 FHI-Aims Calculator
 """
 
+import re
 import shlex
 import warnings
 
 from copy import deepcopy
 import numpy as np
+from scipy.constants import elementary_charge
 
 from ase.calculators.calculator import all_changes
 from ase.calculators.aims import Aims as ASE_Aims
@@ -113,7 +115,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
         try:
             super().calculate(atoms=atoms, properties=properties, system_changes=system_changes)
             calculation_succeeded = True
-            if "plarization" in properties:
+            if "polarization" in properties:
                 self.read_polarization()
             if 'DFT_FAILED_AIMS' in atoms.info:
                 del atoms.info['DFT_FAILED_AIMS']
@@ -130,9 +132,11 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
 
     def read_polarization(self):
 
-        regex_patt = re.compile("(?:Cartesian Polarization)\s+(-?[\d.E-]+)\s+(-?[\d.E-]+)\s+(-?[\d.E-]+)")
+        regex_patt = re.compile(r"(?:Cartesian Polarization)\s+(-?[\d.E-]+)\s+(-?[\d.E-]+)\s+(-?[\d.E-]+)")
 
-        with open(aims_output_file, 'r') as f:
+        out_fname = self.directory / self.template.outputname
+
+        with open(out_fname, 'r') as f:
             lines = f.readlines()
             for line in lines:
                 if "Cartesian Polarization" in line:
@@ -142,7 +146,9 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
             else:
                 raise RuntimeError("No polarization found")
 
-        self.extra_results["polarization"] = polarization
+        # convert from C/m^2 to elementary_charge/Ang^2 
+        polarization = polarization * 1e-20 / elementary_charge
+        self.extra_results["config"]["polarization"] = polarization
 
 
     def _setup_calc_params(self):
