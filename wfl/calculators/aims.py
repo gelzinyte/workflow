@@ -126,7 +126,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
             # Reset parameters to what they were when the calculator was initialized.
             self.parameters = deepcopy(self.initial_parameters)
 
-    def check_input(properties):
+    def check_input(self, properties):
 
         if "plarization" in properties:
             for key, val in self.parameters.items():
@@ -137,7 +137,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
 
         if "permittivity" in properties:
             for key, val in self.parameters.items():
-                if "dielectric" in val:
+                if key == "DFPT" and val == "dielectric":
                     break
             else:
                 raise RuntimeError("Permittivity was asked for in properties, but not included in aims kwargs")
@@ -158,6 +158,8 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
             lines = f.read()
         match = dielectric_regex.search(lines)
         permittivity = np.array([float(mm) for mm in match.groups()]).reshape((3,3))
+
+        permittivity[permittivity<1e-10] = 0.0
 
         self.extra_results["config"]["permittivity"] = permittivity
 
