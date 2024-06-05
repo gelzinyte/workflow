@@ -53,7 +53,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
     **kwargs: arguments for ase.calculators.aims.Aims
         See https://wiki.fysik.dtu.dk/ase/_modules/ase/calculators/aims.html.
     """
-    implemented_properties = ["energy", "forces", "stress", "free_energy", "stresses", "dipole", "magmom", "polarization"]
+    implemented_properties = ["energy", "forces", "stress", "free_energy", "stresses", "dipole", "magmom", "polarization", "permittivity"]
 
     # new default value of num_inputs_per_python_subprocess for calculators.generic,
     # to override that function's built-in default of 10
@@ -102,13 +102,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
         # this may modify self.parameters, will be reset to the initial ones after calculation
         self._setup_calc_params()
 
-        if "plarization" in properties:
-            for key, val in self.parameters.items():
-                if "polarization" in key or "polarization" in val:
-                    break
-            else:
-                raise RuntimeError("Polarization was asked for in properties, but not included in aims kwargs")
-
+        self.check_input(properties)
 
         # from WFLFileIOCalculator
         self.setup_rundir()
@@ -117,6 +111,8 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
             calculation_succeeded = True
             if "polarization" in properties:
                 self.read_polarization()
+            if "permittivity" in properties:
+                self.read_permittivity()
             if 'DFT_FAILED_AIMS' in atoms.info:
                 del atoms.info['DFT_FAILED_AIMS']
         except Exception as exc:
@@ -129,6 +125,42 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
 
             # Reset parameters to what they were when the calculator was initialized.
             self.parameters = deepcopy(self.initial_parameters)
+
+    def check_input(properties):
+
+        if "plarization" in properties:
+            for key, val in self.parameters.items():
+                if "polarization" in key or "polarization" in val:
+                    break
+            else:
+                raise RuntimeError("Polarization was asked for in properties, but not included in aims kwargs")
+
+        if "permittivity" in properties:
+            for key, val in self.parameters.items():
+                if "dielectric" in val:
+                    break
+            else:
+                raise RuntimeError("Permittivity was asked for in properties, but not included in aims kwargs")
+
+
+    def read_permittivity(self):
+
+        dielectric_regex = re.compile(
+            r"(?:DFPT for dielectric_constant:--->  # PARSE DFPT_dielectric_tensor)\n"\
+            r"\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\n"\
+            r"\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\n"\
+            r"\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\n"
+            )
+
+        out_fname = self.directory / self.template.outputname
+
+        with open(out_fname) as f:
+            lines = f.read()
+        match = dielectric_regex.search(lines)
+        permittivity = np.array([float(mm) for mm in match.groups()]).reshape((3,3))
+
+        self.extra_results["config"]["permittivity"] = permittivity
+
 
     def read_polarization(self):
 
