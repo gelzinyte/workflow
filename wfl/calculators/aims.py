@@ -5,6 +5,7 @@ FHI-Aims Calculator
 import re
 import shlex
 import warnings
+import time
 
 from copy import deepcopy
 import numpy as np
@@ -107,7 +108,9 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
         # from WFLFileIOCalculator
         self.setup_rundir()
         try:
+            start = time.time()
             super().calculate(atoms=atoms, properties=properties, system_changes=system_changes)
+            end = time.time()
             calculation_succeeded = True
             if "polarization" in properties:
                 self.read_polarization()
@@ -115,6 +118,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
                 self.read_permittivity()
             if 'DFT_FAILED_AIMS' in atoms.info:
                 del atoms.info['DFT_FAILED_AIMS']
+            self.extra_results["config"]["exe_time"] = end - time
         except Exception as exc:
             atoms.info['DFT_FAILED_AIMS'] = True
             calculation_succeeded = False
