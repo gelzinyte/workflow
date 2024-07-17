@@ -118,7 +118,7 @@ class Aims(WFLFileIOCalculator, ASE_Aims):
                 self.read_permittivity()
             if 'DFT_FAILED_AIMS' in atoms.info:
                 del atoms.info['DFT_FAILED_AIMS']
-            self.extra_results["config"]["exe_time"] = end - time
+            self.extra_results["config"]["exe_time"] = end - start 
         except Exception as exc:
             atoms.info['DFT_FAILED_AIMS'] = True
             calculation_succeeded = False
