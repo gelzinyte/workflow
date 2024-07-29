@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies from pip
         run: |
           echo "numpy<2" >> $PIP_CONSTRAINT
-          python3 -m pip install wheel setuptools numpy scipy click matplotlib pyyaml spglib rdkit flake8 pytest pytest-cov requests
+          python3 -m pip install wheel setuptools numpy scipy click matplotlib pyyaml spglib rdkit flake8 pytest pytest-cov requests f90wrap==0.2.14
 
       - name: Install latest ASE from pypi
         run: |
@@ -213,6 +213,8 @@ jobs:
       - name: Test with pytest - plain
         if: env.coverage-on-version != matrix.python-version
         run: |
+          echo "f90wrap version"
+          python -c "import f90wrap; print(f90wrap.__version__)"
           rm -rf $HOME/pytest_plain
           mkdir $HOME/pytest_plain
           #
