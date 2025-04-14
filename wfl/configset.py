@@ -85,6 +85,8 @@ class ConfigSet:
             # single item, could be a simple filename or a glob. Former needs to be stored as
             # Path, latter as list(Path)
             items_expanded = [Path(f) for f in sorted(glob.glob(str(file_root / items), recursive=True))]
+            if len(items_expanded) == 0:
+                raise ValueError(f"got file '{file_root}' / '{items}' that does not exist")
             if len(items_expanded) == 1 and file_root / items == items_expanded[0]:
                 self.items = file_root / items
             else:
@@ -95,7 +97,10 @@ class ConfigSet:
                 assert isinstance(file_path, (str, Path))
                 if file_root != Path("") and Path(file_path).is_absolute():
                     raise ValueError(f"Got file_root but file {file_path} is an absolute path")
-                self.items.extend([Path(f) for f in sorted(glob.glob(str(file_root / file_path), recursive=True))])
+                items_expanded = [Path(f) for f in sorted(glob.glob(str(file_root / file_path), recursive=True))]
+                if len(items_expanded) == 0:
+                    raise ValueError(f"got file '{file_root}' / '{file_path}' that does not exist")
+                self.items.extend(items_expanded)
         elif isinstance(items[0], ConfigSet):
             self.items = []
             for item in items:
@@ -386,6 +391,12 @@ class ConfigSet:
                     # concatenate current location info to that already stored and yield
                     at.info["_ConfigSet_loc"] = ConfigSet._loc_sep + str(item_i) + at.info["_ConfigSet_loc"]
                     yield at
+
+
+    def __add__(self, other):
+        if not isinstance(other, ConfigSet):
+            raise TypeError(f"unsupported operand type(s) for +: 'ConfigSet' and '{type(other)}'")
+        return ConfigSet([self, other])
 
 
 class OutputSpec:

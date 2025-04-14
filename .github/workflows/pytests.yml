@@ -14,11 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.9" ]
+        python-version: [ "3.10" ]
       max-parallel: 5
     env:
-      coverage-on-version: "3.9"
+      coverage-on-version: "3.10"
       use-mpi: True
+      PIP_CONSTRAINT: pip_constraint.txt
     defaults:
       run:
         shell: bash -l {0}
@@ -38,13 +39,18 @@ jobs:
           python3 --version
 
       - name: Install dependencies from pip
-        run: python3 -m pip install wheel setuptools numpy scipy click matplotlib pyyaml spglib rdkit flake8 pytest pytest-cov requests
-
-      - name: Install latest ASE from gitlab
         run: |
-          python3 -m pip install ase==3.23.0 
+          echo "numpy<2" >> $PIP_CONSTRAINT
+          python3 -m pip install wheel setuptools numpy scipy click matplotlib pyyaml spglib rdkit==2024.3.3 flake8 pytest pytest-cov requests
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
+
+      - name: Install latest ASE from pypi
+        run: |
+          echo PIP_CONSTRAINT $PIP_CONSTRAINT
+          python3 -m pip install ase
           echo -n "ASE VERSION "
           python3 -c "import ase; print(ase.__file__, ase.__version__)"
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install intel-oneapi-mkl for phono3py
         run: |
@@ -57,78 +63,120 @@ jobs:
           sudo apt update
           sudo apt install intel-oneapi-mkl
           sudo apt install intel-oneapi-mkl-devel
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install phono3py from source
         run: |
             # find mklvars
             for pkg in $( apt list --installed | fgrep "installed" | fgrep "mkl" | sed "s#/.*##" ); do
-                if dpkg -L $pkg | egrep -q 'vars.sh$'; then
-                    mklvars=$( dpkg -L $pkg | egrep 'vars.sh$' )
+                if dpkg -L $pkg | egrep -q 'env/vars.sh$'; then
+                    mklvars=$( dpkg -L $pkg | egrep 'env/vars.sh$' )
                     break
                 fi
             done
-            if [ -z $mklvars ]; then
-                echo 'Failed to find *vars.sh in any pkg named *mkl*'
+            if [ $( echo $mklvars | wc -w ) != 1 ]; then
+                echo "wrong number of  mkl setvars.sh '$mklvars'" 1>&2
                 exit 1
             fi
             source $mklvars intel64
 
+            # pip constraint needs to be an absolute filename
+            export PIP_CONSTRAINT=$PWD/$PIP_CONSTRAINT
+
             git clone https://github.com/phonopy/phonopy
             cd phonopy
-            python3 setup.py build
-            python3 -m pip install .
+            echo python3 -m pip install -e . -vvv
+            python3 -m pip install -e . -vvv
             cd ..
 
             git clone https://github.com/phonopy/phono3py
             cd phono3py
-            python3 setup.py build
-            python3 setup.py install
+            python3 -m pip install -e . -vvv
             cd ..
+            python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install Quippy from PyPI
-        run: python3 -m pip install quippy-ase
+        run: |
+            python3 -m pip install quippy-ase
+            python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install xTB (before things that need pandas like MACE and wfl, since it will break pandas-numpy compatibility by downgrading numpy)
         run: |
+          # force compatible numpy version
+          conda install 'numpy<2'
           conda install -c conda-forge xtb-python
           python3 -m pip install typing-extensions
           # install pandas now to encourage compatible numpy version after conda regressed it
           python3 -m pip install pandas
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: MACE
         run: |
           echo "search for torch version"
           set +o pipefail
-          torch_version=$( python3 -m pip install torch== 2>&1 | fgrep 'from versions' | sed -e 's/.* //' -e 's/)//' )
-          echo "found torch version $torch_version, installing cpu-only variant"
+
+          # echo "torch versions"
+          # python3 -m pip install torch==
+          # echo "torch versions to search"
+          # python3 -m pip install torch== 2>&1 | fgrep 'from versions' |
+          #                      sed -e 's/.*from versions: //' -e 's/)//' -e 's/,[ ]*/\n/g' | tac
+
+          # search for available torch version with +cpu support
+          # for torch_version_test in $( python3 -m pip install torch== 2>&1 | fgrep 'from versions' |
+          #                              sed -e 's/.*from versions: //' -e 's/)//' -e 's/,[ ]*/\n/g' | tac ); do
+          wget https://pypi.org/pypi/torch/json -O torch_versions
+          for torch_version_test in $( python3 -c "import json; print(' '.join(json.load(open('torch_versions'))['releases'].keys()))" | sed 's/ /\n/g' | tac ); do
+              echo "check torch_version_test $torch_version_test"
+              set +e
+              python3 -m pip install --dry-run torch==${torch_version_test}+cpu \
+                                     -f https://download.pytorch.org/whl/torch_stable.html 2>&1
+              search_stat=$?
+              echo "got search_stat $search_stat"
+              set -e
+              if [ $search_stat == 0 ]; then
+                  echo "got valid +cpu version, exiting"
+                  torch_version=${torch_version_test}
+                  break
+              fi
+          done
+          if [ -z $torch_version ]; then
+              echo "Failed to find any pytorch version with +cpu variant" 1>&2
+              exit 1
+          fi
+          echo "found torch version ${torch_version}+cpu, installing"
           python3 -m pip install torch==${torch_version}+cpu -f https://download.pytorch.org/whl/torch_stable.html
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
           echo "installing mace"
           python3 -m pip install git+https://github.com/ACEsuit/mace.git@main
-          python3 -c "import mace; print(mace.__file__)"
+          python3 -c "import mace; print('mace file', mace.__file__)"
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Julia and ace fit
         run: |
-          python3 -m pip install pip install threadpoolctl
+          python3 -m pip install threadpoolctl
           wget https://julialang-s3.julialang.org/bin/linux/x64/1.8/julia-1.8.1-linux-x86_64.tar.gz
           tar xzf julia-1.8.1-linux-x86_64.tar.gz
           # note that this hardwires a particular compatible ACE1pack version
           echo 'using Pkg; pkg"registry add https://github.com/JuliaRegistries/General"; pkg"registry add https://github.com/JuliaMolSim/MolSim.git"; pkg"add ACE1pack@0.0, ACE1, JuLIP, IPFitting, ASE"' > ace1pack_install.jl
           ${PWD}/julia-1.8.1/bin/julia ace1pack_install.jl
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install wfl (expyre and universalSOAP are dependencies)
-        run: python3 -m pip install .
+        run: |
+            python3 -m pip install .
+            python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install Quantum Espresso
         run: |
           sudo apt-get install --no-install-recommends quantum-espresso
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install MOPAC
         run: |
-          wget https://github.com/openmopac/mopac/releases/download/v22.0.6/mopac-22.0.6-linux.tar.gz
-          tar -xzvf mopac-22.0.6-linux.tar.gz
-
-      - name: add mopac to path
-        run: echo $GITHUB_WORKSPACE/mopac-22.0.6-linux/bin >> $GITHUB_PATH
+          wget https://github.com/openmopac/mopac/releases/download/v22.1.1/mopac-22.1.1-linux.tar.gz
+          tar -xzvf mopac-22.1.1-linux.tar.gz
+          echo $GITHUB_WORKSPACE/mopac-22.1.1-linux/bin >> $GITHUB_PATH
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install buildcell
         run: |
@@ -140,6 +188,7 @@ jobs:
           mkdir -p $HOME/bin
           cp src/buildcell/src/buildcell $HOME/bin/
           cd ..
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Add buildcell to system path
         run: |
@@ -151,6 +200,7 @@ jobs:
           # this can eaily be turned off if needed
           conda install -c conda-forge mpi4py openmpi pytest-mpi
           python3 -m pip install mpipool
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Install and configure slurm and ExPyRe
         run: |
@@ -158,7 +208,12 @@ jobs:
           echo "SLURM apt-get done, doing local configuration"
           host_s=$( hostname -s )
           if [ -f /etc/slurm/slurm.conf ]; then sudo mv /etc/slurm/slurm.conf /etc/slurm/slurm.conf.orig; fi
-          sudo bash -c 'gzip -cd /usr/share/doc/slurmd/examples/slurm.conf.simple.gz > /etc/slurm/slurm.conf'
+          # /usr/share/doc/slurm-client/examples/slurm.conf.simple
+          # /usr/share/doc/slurmd/examples/slurm.conf.simple
+          # /usr/share/doc/slurmctld/examples/slurm.conf.simple
+          ## sudo bash -c 'gzip -cd /usr/share/doc/slurmd/examples/slurm.conf.simple.gz > /etc/slurm/slurm.conf'
+          sudo bash -c 'cp       /usr/share/doc/slurmd/examples/slurm.conf.simple /etc/slurm/slurm.conf'
+          ##
           # sudo sed -E -i -e "s/^\s*ClusterName\s*=.*/ClusterName=github_expyre_test/" /etc/slurm/slurm.conf
           sudo bash -c 'sed -E -i -e "s/^\s*SlurmctldHost\s*=.*/SlurmctldHost=_HOST_/" /etc/slurm/slurm.conf'
           # sudo sed -E -i -e "s/^\s*DefaultStorageHost\s*=.*/DefaultStorageHost=none" /etc/slurm/slurm.conf
@@ -174,13 +229,23 @@ jobs:
           sinfo -s --long
           mkdir $HOME/.expyre
           cp .github/workflows_assets/config.json $HOME/.expyre
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Set up pw.x for running in wfl
         run: |
           echo "which pw.x"
           which pw.x
           ls -l /usr/bin/pw.x
-          export PYTEST_WFL_ASE_ESPRESSO_COMMAND=pw.x
+          espresso_command=pw.x
+
+          mkdir -p ${HOME}/.config/ase/
+          echo "[espresso]" >> ${HOME}/.config/ase/config.ini
+          echo "command = ${espresso_command}" >> ${HOME}/.config/ase/config.ini
+          echo "pseudo_dir = ${HOME}/dummy" >> ${HOME}/.config/ase/config.ini
+
+          echo 'post-espresso $HOME/.config/ase/config.ini'
+          cat $HOME/.config/ase/config.ini
+          python3 -c "import numpy; print('numpy version', numpy.__version__)"
 
       - name: Lint with flake8
         run: |
@@ -194,6 +259,8 @@ jobs:
         run: |
           rm -rf $HOME/pytest_plain
           mkdir $HOME/pytest_plain
+          # attempt to work around mkl/numpy issue
+          export MKL_THREADING_LAYER=GNU
           #
           export EXPYRE_PYTEST_SYSTEMS=github
           export WFL_PYTEST_BUILDCELL=$HOME/bin/buildcell
@@ -205,12 +272,10 @@ jobs:
       - name: Test with pytest - coverage
         if: env.coverage-on-version == matrix.python-version
         run: |
-          echo "BOB pre actual pytest"
-          which python3
-          python3 -m pip list | grep numpy
-          python3 -c "import numpy; print(numpy.__file__, numpy.__version__)"
           rm -rf $HOME/pytest_cov
           mkdir $HOME/pytest_cov
+          # attempt to work around mkl/numpy issue
+          export MKL_THREADING_LAYER=GNU
           #
           export EXPYRE_PYTEST_SYSTEMS=github
           export WFL_PYTEST_BUILDCELL=$HOME/bin/buildcell
@@ -245,7 +310,7 @@ jobs:
           mpirun -n 2 pytest --cov=wfl --cov-report term --cov-config=tests/.coveragerc --cov-report term-missing --cov-report term:skip-covered --with-mpi -k mpi --cov-append
 
       - name: 'Upload Coverage Data'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: env.coverage-on-version == matrix.python-version
         with:
           name: coverage-html-${{ matrix.python-version }}

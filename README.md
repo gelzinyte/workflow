@@ -8,40 +8,31 @@ The main functions of Workflow is to efficiently parallelise operations over a s
 
 For examples and more information see [documentation](https://libatoms.github.io/workflow/)
 
-NOTE: because of the very large time intervals between official ASE releases, `wfl` is typically
-set up for (and tested against) the latest ASE gitlab repo `master` branch.  Recent changes
-that require this support include variable cell minimization using `FrechetCellFilter` and
-`Espresso` calculator configuration. See documentation link above for installation instructions.
+`wfl` and its dependencies may be installed via `pip install wfl`. 
 
 
 # Recent changes
 
-v0.2.3:
+v0.3.2:
 
-- Add wfl.generate.neb, with required improved support for passing ConfigSet.groups() to 
-  autoaparallelized functions
+- Add `+` operator for combining `ConfigSet` objects
+- Improved `wfl.generate.md` logging
+- Little bug fixes / error message improvements
 
-- Improved handling of old and new style ase.calculators.espresso.Espresso initialization
+v0.3.1:
 
-v0.2.2:
+- additional updates to file-based calculators for ASE v3.23.
+- fixes to parity plots
 
-- Improve checking of DFT calculator convergence
+v0.3.0:
 
-v0.2.1:
+- Update the file-based calculators (Orca, FHI-Aims, Vasp, Quantum Espresso, Castep) to work 
+  with with ASE v3.23. This update breaks backwards-compatibility. For compatibility with with 
+  the ASE v3.22 see use wfl v0.2.8 or earlier. 
 
-- Fix group iterator
+v0.2.8:
 
-v0.2.0:
+- Latest version compatible with ASE v3.22.x. To install, use `pip install wfl==0.2.8`. 
 
-- Change all wfl operations to use explicit random number generator [pull 285](https://github.com/libAtoms/workflow/pull/285), to improve reproducibility of scripts and reduce the chances that on script rerun, cached jobs will not be recognized due to uncontrolled change in random seed (as in [issue 283](https://github.com/libAtoms/workflow/issues/283) and [issue 284](https://github.com/libAtoms/workflow/issues/284)).  Note that this change breaks backward compatibility because many functions now _require_ an `rng` argument, for example
-  ```python
-  rng = np.random.default_rng(1)
-  md_configs = md.md(..., rng=rng, ...)
-  ```
+For older changes see [documentation](https://libatoms.github.io/workflow).
 
-v0.1.0:
-
-- make it possible to fire off several remote autoparallellized ops without waiting for their jobs to finish
-- multi-pass calclation in `Vasp`, to allow for things like GGA followed by HSE
-- MACE fitting, including remote jobs
-- various bug fixes

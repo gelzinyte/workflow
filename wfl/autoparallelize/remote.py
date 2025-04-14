@@ -61,6 +61,11 @@ def do_remotely(autopara_info, iterable=None, outputspec=None, op=None, rng=None
                 # special things to do when item is Atoms
                 if 'EXPYRE_REMOTE_JOB_FAILED' in item.info:
                     del item.info['EXPYRE_REMOTE_JOB_FAILED']
+                # remote ConfigSet_loc info from things that are not ConfigSets,
+                # e.g. lists that were extracted from a ConfigSet iterator
+                if not isinstance(iterable, ConfigSet):
+                    if item.info.pop("_ConfigSet_loc", None) is not None:
+                        warnings.warn("Removed _ConfigSet_loc info field from Atoms because input is not a ConfigSet")
 
             item_list.append(item)
             item_i_list.append(item_i)
@@ -79,6 +84,15 @@ def do_remotely(autopara_info, iterable=None, outputspec=None, op=None, rng=None
         if isinstance(iterable, ConfigSet):
             job_iterable = ConfigSet(item_list)
         else:
+            # for a subtle reason, passing an object with a loc to the remote function
+            # leads the remote do_in_pool to return a ConfigSet with empty containers
+            # for all earlier ConfigSet_loc, which confuses the code that processes the remote
+            # job results. If isinstance(item, Atoms), this info is remove automatically
+            # when item_list is turned into a ConfigSet (just above).  However, if item is a ConfigSet
+            # we must do this manually here
+            for item in item_list:
+                if isinstance(item, ConfigSet):
+                    item._enclosing_loc = ''
             job_iterable = item_list
         co = OutputSpec()
 

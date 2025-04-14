@@ -51,7 +51,7 @@ def _run_autopara_wrappable(atoms, calculator, properties=None, output_prefix='_
     except Exception as exc:
         # if calculator constructor failed, it may still be fine if every atoms object has
         # enough info to construct its own calculator, but we won't know until later
-        calculator_failure_message = f"(exc)\n{traceback.format_exc()}"
+        calculator_failure_message = f"({exc})\n{traceback.format_exc()}"
         calculator_default = None
 
     if output_prefix == '_auto_':
@@ -149,6 +149,20 @@ def calculate(*args, **kwargs):
     calculator = kwargs.get("calculator")
     if calculator is None:
         calculator = args[2]
+
+    #check if calculator should be wrapped
+    if type(calculator) == tuple:
+        from ase.calculators.espresso import Espresso as ASE_Espresso
+        from ase.calculators.vasp.vasp import Vasp as ASE_Vasp
+        from ase.calculators.aims import Aims as ASE_Aims
+        from ase.calculators.castep import Castep as ASE_Castep
+        from ase.calculators.mopac import MOPAC as ASE_MOPAC
+        from ase.calculators.orca import ORCA as ASE_ORCA
+        wrapped_types = [ASE_Espresso, ASE_Vasp, ASE_Aims, ASE_Castep, ASE_MOPAC, ASE_ORCA]
+
+        calc = calculator[0]
+        if calc in wrapped_types:
+            warnings.warn(f"{calc} should be imported from wfl.calculators rather than ase. Using {calc} directly can lead to duplicated singlepoints", RuntimeWarning)
 
     default_autopara_info = getattr(calculator, "wfl_generic_default_autopara_info", {"num_inputs_per_python_subprocess": 10})
 

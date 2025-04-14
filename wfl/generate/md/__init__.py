@@ -6,6 +6,7 @@ from ase.md.nvtberendsen import NVTBerendsen
 from ase.md.velocitydistribution import MaxwellBoltzmannDistribution, Stationary
 from ase.md.verlet import VelocityVerlet
 from ase.md.langevin import Langevin
+from ase.md.logger import MDLogger
 from ase.units import GPa, fs
 
 from wfl.autoparallelize import autoparallelize, autoparallelize_docstring
@@ -19,10 +20,10 @@ bar = 1.0e-4 * GPa
 
 
 def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBerendsen", temperature=None, temperature_tau=None,
-              pressure=None, pressure_tau=None, compressibility_fd_displ=0.01,
+              pressure=None, pressure_tau=None, compressibility_au=None, compressibility_fd_displ=0.01,
               traj_step_interval=1, skip_failures=True, results_prefix='last_op__md_', verbose=False, update_config_type="append",
-              traj_select_during_func=lambda at: True, traj_select_after_func=None, abort_check=None, rng=None,
-              _autopara_per_item_info=None):
+              traj_select_during_func=lambda at: True, traj_select_after_func=None, abort_check=None,
+              logger_kwargs=None, logger_interval=None, rng=None, _autopara_per_item_info=None):
     """runs an MD trajectory with aggresive, not necessarily physical, integrators for
     sampling configs. By default calculator properties for each frame stored in
     keys prefixed with "last_op__md_", which may be overwritten by next operation.
@@ -44,15 +45,19 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBere
         - float: constant T
         - tuple/list of float, float, [int=10]: T_init, T_final, and optional number of stages for ramp
         - [ {'T_i': float, 'T_f' : float, 'traj_frac' : flot, 'n_stages': int=10}, ... ] list of stages, each one a ramp, with
-        duration defined as fraction of total number of steps
+          duration defined as fraction of total number of steps
+        Overridden by `atoms.info["WFL_MD_TEMPERATURE"]`
     temperature_tau: float, default None
         Time scale for thermostat (fs). Directly used for Berendsen integrator, or as 1/friction for Langevin integrator.
     pressure: None / float / tuple
-        applied pressure distribution (GPa) as parsed by wfl.utils.pressure.sample_pressure()
-        enabled Berendsen constant P volume rescaling
+        Applied pressure distribution (GPa) as parsed by wfl.utils.pressure.sample_pressure().
+        Enables Berendsen constant P volume rescaling.
+        Overridden by `atoms.info["WFL_MD_PRESSURE"]`
     pressure_tau: float, default None
         time scale for Berendsen constant P volume rescaling (fs)
         ignored if pressure is None, defaults to 3*temperature_tau
+    compressibility_au: float, default None
+        compressibility, if available, for NPTBerendsen
     compressibility_fd_displ: float, default 0.01
         finite difference in strain to use when computing compressibility for NPTBerendsen
     traj_step_interval: int, default 1
@@ -79,6 +84,12 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBere
         checks the MD snapshots and aborts the simulation on some condition.
     rng: numpy.random.Generator, default None
         random number generator to use (needed for pressure sampling, initial temperature, or Langevin dynamics)
+    logger_kwargs: dict, default None
+        kwargs to MDLogger to attach to each MD run, including "logfile" as string to which
+        config number will be appended. If logfile is "-", stdout will be used, and config number
+        will be prepended to each outout line. User defined ase.md.MDLogger derived class can be provided with "logger" as key.
+    logger_interval: int, default None
+        Enable logging at this interval
     _autopara_per_item_info: dict
         INTERNALLY used by autoparallelization framework to make runs reproducible (see
         wfl.autoparallelize.autoparallelize() docs)
@@ -98,65 +109,89 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBere
     else:
         logfile = None
 
-    if temperature_tau is None and (temperature is not None and not isinstance(temperature, (float, int))):
-        raise RuntimeError(f'NVE (temperature_tau is None) can only accept temperature=float for initial T, got {type(temperature)}')
+    if logger_interval is not None and logger_interval > 0:
+        if logger_kwargs is None:
+            logger_kwargs = {}
+        logger_constructor = logger_kwargs.pop("logger", MDLogger)
+        logger_logfile = logger_kwargs.get("logfile", "-")
 
-    if temperature is not None:
-        if isinstance(temperature, (float, int)):
-            # float into a list
-            temperature = [temperature]
-        if not isinstance(temperature[0], dict):
-            # create a stage dict from a constant or ramp
-            t_stage_data = temperature
-            # start with constant
-            t_stage = {'T_i': t_stage_data[0], 'T_f': t_stage_data[0], 'traj_frac': 1.0, 'n_stages': 10, 'steps': steps}
-            if len(t_stage_data) >= 2:
-                # set different final T for ramp
-                t_stage['T_f'] = t_stage_data[1]
-            if len(t_stage_data) >= 3:
-                # set number of stages
-                t_stage['n_stages'] = t_stage_data[2]
-            temperature = [t_stage]
-        else:
-            for t_stage in temperature:
-                if 'n_stages' not in t_stage:
-                    t_stage['n_stages'] = 10
+    def _get_pressure(atoms):
+        return atoms.info.get("WFL_MD_PRESSURE", pressure)
+
+    def _get_temperature(atoms):
+        temperature_use = atoms.info.get("WFL_MD_TEMPERATURE", temperature)
+
+        if temperature_tau is None and (temperature_use is not None and not isinstance(temperature_use, (float, int, np.floating, np.integer))):
+            raise RuntimeError(f'NVE (temperature_tau is None) can only accept temperature=float for initial T, got {type(temperature_use)}')
+
+        if temperature_use is not None:
+            # assume that dicts are already in temperature profile format
+            if not isinstance(temperature_use, dict):
+                try:
+                    # check if it's a list, tuple, etc
+                    len(temperature_use)
+                except:
+                    # number into a list
+                    temperature_use = [temperature_use]
+            if not isinstance(temperature_use[0], dict):
+                # create a stage dict from a constant or ramp
+                t_stage_data = temperature_use
+                # start with constant
+                t_stage = {'T_i': t_stage_data[0], 'T_f': t_stage_data[0], 'traj_frac': 1.0, 'n_stages': 10, 'steps': steps}
+                if len(t_stage_data) >= 2:
+                    # set different final T for ramp
+                    t_stage['T_f'] = t_stage_data[1]
+                if len(t_stage_data) >= 3:
+                    # set number of stages
+                    t_stage['n_stages'] = t_stage_data[2]
+                temperature_use = [t_stage]
+            else:
+                for t_stage in temperature_use:
+                    if 'n_stages' not in t_stage:
+                        t_stage['n_stages'] = 10
+
+        return temperature_use
 
     for at_i, at in enumerate(atoms_to_list(atoms)):
         # get rng from autopara_per_item info if available ("rng" arg that was passed in was
         # already used by autoparallelization framework to set "rng" key in per-item dict)
         rng = _autopara_per_item_info[at_i].get("rng")
+        item_i = _autopara_per_item_info[at_i].get("item_i")
+
+        temperature_use = _get_temperature(at)
+        pressure_use = _get_pressure(at)
 
         at.calc = calculator
-        compressibility = None
-        if pressure is not None:
-            pressure = sample_pressure(pressure, at, rng=rng)
-            at.info['MD_pressure_GPa'] = pressure
+        if pressure_use is not None:
+            pressure_use = sample_pressure(pressure_use, at, rng=rng)
+            at.info['MD_pressure_GPa'] = pressure_use
             # convert to ASE internal units
-            pressure *= GPa
+            pressure_use *= GPa
+            if compressibility_au is None:
+                E0 = at.get_potential_energy()
+                c0 = at.get_cell()
+                at.set_cell(c0 * (1.0 + compressibility_fd_displ), scale_atoms=True)
+                Ep = at.get_potential_energy()
+                at.set_cell(c0 * (1.0 - compressibility_fd_displ), scale_atoms=True)
+                Em = at.get_potential_energy()
+                at.set_cell(c0, scale_atoms=True)
+                d2E_dF2 = (Ep + Em - 2.0 * E0) / (compressibility_fd_displ ** 2)
+                compressibility_au_use = at.get_volume() / d2E_dF2
+            else:
+                compressibility_au_use = compressibility_au
 
-            E0 = at.get_potential_energy()
-            c0 = at.get_cell()
-            at.set_cell(c0 * (1.0 + compressibility_fd_displ), scale_atoms=True)
-            Ep = at.get_potential_energy()
-            at.set_cell(c0 * (1.0 - compressibility_fd_displ), scale_atoms=True)
-            Em = at.get_potential_energy()
-            at.set_cell(c0, scale_atoms=True)
-            d2E_dF2 = (Ep + Em - 2.0 * E0) / (compressibility_fd_displ ** 2)
-            compressibility = at.get_volume() / d2E_dF2
-
-        if temperature is not None:
+        if temperature_use is not None:
             # set initial temperature
             assert rng is not None
-            MaxwellBoltzmannDistribution(at, temperature_K=temperature[0]['T_i'], force_temp=True, communicator=None, rng=rng)
+            MaxwellBoltzmannDistribution(at, temperature_K=temperature_use[0]['T_i'], force_temp=True, communicator=None, rng=rng)
             Stationary(at, preserve_temperature=True)
 
         stage_kwargs = {'timestep': dt * fs, 'logfile': logfile}
 
         if temperature_tau is None:
             # NVE
-            if pressure is not None:
-                raise RuntimeError('Cannot do NPH dynamics')
+            if pressure_use is not None:
+                raise RuntimeError(f'Got pressure {pressure_use} but no active thermostat temperature_tau={temperature_tau}. Can only do NPT, not NPH, dynamics')
             md_constructor = VelocityVerlet
             # one stage, simple
             all_stage_kwargs = [stage_kwargs.copy()]
@@ -167,10 +202,10 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBere
             all_stage_kwargs = []
             all_run_kwargs = []
 
-            if pressure is not None:
+            if pressure_use is not None:
                 md_constructor = NPTBerendsen
-                stage_kwargs['pressure_au'] = pressure
-                stage_kwargs['compressibility_au'] = compressibility
+                stage_kwargs['pressure_au'] = pressure_use
+                stage_kwargs['compressibility_au'] = compressibility_au_use
                 stage_kwargs['taut'] = temperature_tau * fs
                 stage_kwargs['taup'] = pressure_tau * fs if pressure_tau is not None else temperature_tau * fs * 3
             else:
@@ -184,7 +219,7 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBere
                     assert rng is not None
                     stage_kwargs["rng"] = rng
 
-            for t_stage_i, t_stage in enumerate(temperature):
+            for t_stage_i, t_stage in enumerate(temperature_use):
                 stage_steps = t_stage['traj_frac'] * steps
 
                 if t_stage['T_f'] == t_stage['T_i']:
@@ -210,6 +245,7 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBere
             if not first_step_of_later_stage and cur_step % interval == 0:
                 at.info['MD_time_fs'] = cur_step * dt
                 at.info['MD_step'] = cur_step
+                at.info["MD_current_temperature"] = at.get_temperature()
                 at_save = at_copy_save_calc_results(at, prefix=results_prefix)
 
                 if traj_select_during_func(at):
@@ -233,7 +269,21 @@ def _sample_autopara_wrappable(atoms, calculator, steps, dt, integrator="NVTBere
                 at.info['MD_temperature_K'] = stage_kwargs['temperature_K']
 
             md = md_constructor(at, **stage_kwargs)
+
             md.attach(process_step, 1, traj_step_interval)
+            if logger_interval is not None and logger_interval > 0:
+                if logger_logfile == "-":
+                    logger_kwargs["logfile"] = "-"
+                else:
+                    logger_kwargs["logfile"] = f"{logger_logfile}.config_{item_i}"
+                logger_kwargs["dyn"] = md
+                logger_kwargs["atoms"] = at
+                logger = logger_constructor(**logger_kwargs)
+                if logger_logfile == "-":
+                    # add prefix to each line
+                    logger.hdr = f"config {item_i} " + logger.hdr
+                    logger.fmt = f"config {item_i} " + logger.fmt
+                md.attach(logger, logger_interval)
 
             if stage_i > 0:
                 first_step_of_later_stage = True

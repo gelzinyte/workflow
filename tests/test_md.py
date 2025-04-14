@@ -2,12 +2,15 @@ from pytest import approx
 import pytest
 
 import numpy as np
+import os
+from pathlib import Path
 
 from ase import Atoms
 import ase.io
 from ase.build import bulk
 from ase.calculators.emt import EMT
 from ase.units import fs
+from ase.md.logger import MDLogger
 from wfl.autoparallelize import autoparainfo
 
 from wfl.generate import md
@@ -86,6 +89,29 @@ def test_NVT_Langevin_const_T(cu_slab):
 
     assert len(atoms_traj) == 301
     assert all([at.info['MD_temperature_K'] == 500.0 for at in atoms_traj])
+
+
+def test_NVT_Langevin_const_T_per_config(cu_slab):
+
+    calc = EMT()
+
+    inputs = ConfigSet([cu_slab.copy(), cu_slab.copy()])
+    outputs = OutputSpec()
+
+    for at_i, at in enumerate(inputs):
+        at.info["WFL_MD_TEMPERATURE"] = 500 + at_i * 100
+
+    n_steps = 30
+
+    atoms_traj = md.md(inputs, outputs, calculator=calc, integrator="Langevin", steps=n_steps, dt=1.0,
+                       temperature=200.0, temperature_tau=100/fs, rng=np.random.default_rng(1))
+
+    atoms_traj = list(atoms_traj)
+    atoms_final = atoms_traj[-1]
+
+    assert len(atoms_traj) == (n_steps + 1) * 2
+    assert all([at.info['MD_temperature_K'] == 500.0 for at in list(atoms_traj)[:n_steps + 1]])
+    assert all([at.info['MD_temperature_K'] == 600.0 for at in list(atoms_traj)[n_steps + 1:]])
 
 
 def test_NVT_const_T_mult_configs_distinct_seeds(cu_slab):
@@ -216,3 +242,65 @@ def test_md_abort_function(cu_slab):
                        rng=np.random.default_rng(1))
 
     assert len(list(atoms_traj)) < 501
+
+
+def test_md_attach_logger(cu_slab, tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    calc = EMT()
+    autopara_info = autoparainfo.AutoparaInfo(num_python_subprocesses=2, num_inputs_per_python_subprocess=1, skip_failed=False)
+
+    inputs = ConfigSet([cu_slab, cu_slab])
+    outputs = OutputSpec()
+
+    logger_kwargs = {
+        "logger" : MDLogger,
+        "logfile" : "test_log",
+    }
+
+    atoms_traj = md.md(inputs, outputs, calculator=calc, integrator="Langevin", steps=300, dt=1.0,
+                           temperature=500.0, temperature_tau=100/fs, logger_kwargs=logger_kwargs, logger_interval=1,
+                           rng=np.random.default_rng(1), autopara_info=autopara_info,)
+
+    atoms_traj = list(atoms_traj)
+    atoms_final = atoms_traj[-1]
+
+    workdir = Path(os.getcwd())
+
+    assert len(atoms_traj) == 602
+    assert all([Path(workdir / "test_log.config_0").is_file(), Path(workdir / "test_log.config_1").is_file()])
+
+
+def test_md_attach_logger_stdout(cu_slab, tmp_path, monkeypatch, capsys):
+    monkeypatch.chdir(tmp_path)
+
+    calc = EMT()
+    autopara_info = autoparainfo.AutoparaInfo(num_python_subprocesses=2, num_inputs_per_python_subprocess=1, skip_failed=False)
+
+    inputs = ConfigSet([cu_slab, cu_slab])
+    outputs = OutputSpec()
+
+    logger_kwargs = {
+        "logger" : MDLogger,
+        "logfile" : "-",
+    }
+
+    atoms_traj = md.md(inputs, outputs, calculator=calc, integrator="Langevin", steps=300, dt=1.0,
+                           temperature=500.0, temperature_tau=100/fs, logger_kwargs=logger_kwargs, logger_interval=1,
+                           rng=np.random.default_rng(1), autopara_info=autopara_info,)
+
+    atoms_traj = list(atoms_traj)
+    atoms_final = atoms_traj[-1]
+
+    workdir = Path(os.getcwd())
+
+    assert len(atoms_traj) == 602
+
+    # make sure normal log files were not written
+    assert len(list(Path(workdir).glob("*"))) == 0
+
+    captured = capsys.readouterr()
+    n_0 = sum(['item 0 ' in captured.out.splitlines()])
+    n_1 = sum(['item 1 ' in captured.out.splitlines()])
+    if n_0 != 301 or n_1 != 301:
+        pytest.xfail("capsys fails to capture stdout to check for logger output")
