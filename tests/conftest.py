@@ -73,7 +73,7 @@ def pytest_collection_modifyitems(config, items):
 ### fixture for workflow tests that use expyre, namely tests/test_remote_run.py
 @pytest.fixture()
 def expyre_systems(tmp_path):
-    if not str(tmp_path).startswith(str(Path.home())):
+    if not str(tmp_path).startswith(str(Path.home().resolve())):
         pytest.xfail(reason='expyre tests require tmp_path be under $HOME, pass "--basetemp $HOME/pytest"')
 
     expyre_mod = pytest.importorskip('expyre')

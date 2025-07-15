@@ -7,7 +7,12 @@ export ASE_MOPAC_COMMAND="${HOME}/programs/mopac-22.1.1-linux/bin/mopac PREFIX.m
 
 export JANPA_HOME_DIR="${HOME}/programs/janpa"
 
+export AIMS_SPECIES_DIR="${HOME}/programs/fhi-aims/FHIaims_170124/species_defaults/defaults_2020/light"
+
+OMP_NUM_THREADS=1
+
 # Aims
 pytest -v -s -rxXs  ../calculators/test_aims.py
 pytest -v -s -rxXs ../calculators/test_orca.py
+pytest -v -s -rxXs --basetemp ${HOME}/pytest ../test_doc_examples.py 
 
