@@ -73,10 +73,10 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
         optimisation logs are not printed unless this is True
     update_config_type: ["append" | "overwrite" | False], default "append"
         whether/how to add at.info['optimize_config_type'] to at.info['config_type']
-    optimizer : ASE optimizer
-        optimizer to use, default LBFGSPrecon
+    optimizer : ASE optimizer, default PreconLBFGS
+        optimizer to use. 
     opt_kwargs
-        keyword arguments for PreconLBFGS
+        keyword arguments for optimizer
     rng: numpy.random.Generator, default None
         random number generator to use (needed for pressure sampling, initial temperature, or Langevin dynamics)
     _autopara_per_item_info: dict
