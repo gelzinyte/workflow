@@ -95,8 +95,8 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
 
     calculator = construct_calculator_picklesafe(calculator)
 
-#    if smax is None:
-#        smax = fmax
+    if "precon" in optimizer.__module__.split(".") and smax is None:
+        smax = fmax
 
     if keep_symmetry:
         # noinspection PyUnresolvedReferences,PyUnresolvedReferences
@@ -164,7 +164,10 @@ def _run_autopara_wrappable(atoms, calculator, fmax=1.0e-3, smax=None, steps=100
         converged = False
 
         try:
-            converged = opt.run(fmax=fmax, smax=smax, steps=steps)
+            if smax is None:
+                converged = opt.run(fmax=fmax, steps=steps)
+            else:
+                converged = opt.run(fmax=fmax, smax=smax, steps=steps)
         except Exception as exc:
             # label actual failed optimizations
             # when this happens, the atomic config somehow ends up with a 6-vector stress, which can't be
