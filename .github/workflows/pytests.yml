@@ -209,9 +209,9 @@ jobs:
       - name: Install buildcell
         run: |
           sudo apt-get install gfortran
-          wget https://www.mtg.msm.cam.ac.uk/system/files/documents/airss-0.9.1.tgz
-          tar xzf airss-0.9.1.tgz
-          cd airss-0.9.1
+          wget https://www.mtg.msm.cam.ac.uk/files/airss-v0.9.4.tgz
+          tar xzf airss-v0.9.4.tgz
+          cd airss
           make buildcell
           mkdir -p $HOME/bin
           cp src/buildcell/src/buildcell $HOME/bin/
